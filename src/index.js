@@ -2,8 +2,10 @@ import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import { combineReducers, applyMiddleware, createStore } from 'redux';
 import { createLogger } from 'redux-logger';
-//import './index.css';
+
 import 'bootstrap/dist/css/bootstrap.min.css';
+
+//import './index.css';
 //import * as serviceWorker from './serviceWorker';
 
 
@@ -155,6 +157,9 @@ const store = createStore(
     applyMiddleware(logger),
 );
 
+
+// View layer
+
 class CustomButton extends Component {
     render() {
         const { children, onClick } = this.props; 
@@ -189,9 +194,6 @@ class CustomButtonBox extends Component {
     }
 }
 
-
-// View layer
-
 function TheApp({ params, onSpeedUP, onSpeedDOWN, onTempUP, onTempDOWN }) {
     const { speed, temp, autonomie } = params;
     return (
@@ -205,18 +207,18 @@ function TheApp({ params, onSpeedUP, onSpeedDOWN, onTempUP, onTempDOWN }) {
             </div>
             <div className="card-body">
                 <CustomButtonBox
-                    value= { speed }
-                    unit= " km/h"
-                    onClickUP = { onSpeedUP }
-                    onClickDOWN = { onSpeedDOWN }>
+                    value={ speed }
+                    unit=" km/h"
+                    onClickUP={ onSpeedUP }
+                    onClickDOWN={ onSpeedDOWN }>
                     Vitesse
                 </CustomButtonBox>
                 
                 <CustomButtonBox
-                    value= { temp }
-                    unit="°C"
-                    onClickUP = { onTempUP }
-                    onClickDOWN = { onTempDOWN }>
+                    value={ temp }
+                    unit=" °C"
+                    onClickUP={ onTempUP }
+                    onClickDOWN={ onTempDOWN }>
                     Température
                 </CustomButtonBox>
             </div>
