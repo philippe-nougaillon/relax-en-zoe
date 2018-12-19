@@ -1,8 +1,9 @@
-import React from 'react';
+import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import { combineReducers, applyMiddleware, createStore } from 'redux';
 import { createLogger } from 'redux-logger';
-import './index.css';
+//import './index.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 //import * as serviceWorker from './serviceWorker';
 
 
@@ -153,35 +154,52 @@ const store = createStore(
     applyMiddleware(logger),
 );
 
+class CustomButton extends Component {
+    render() {
+        const { children, onClick } = this.props; 
+        return (
+            <button
+                type="button"
+                className="btn btn-outline-info"
+                onClick={ onClick }>
+                { children }
+            </button>
+        ); 
+    }
+}
+
 
 // View layer
 
 function TheApp({ params, onSpeedDOWN, onSpeedUP, onTempDOWN, onTempUP }) {
     const { speed, temp, autonomie } = params;
     return (
-        <div>
-            <h1>
-                <small>Autonomie</small>
-                <br />
-                { autonomie | 0 } km
-            </h1>
+        <div className="card">
+            <div class="card-header">
+                <h1>
+                    <small>Autonomie</small>
+                    <br />
+                    { autonomie | 0 } km
+                </h1>
+            </div>
+            <div className="card-body">
+                <h3>
+                    <small>Vitesse</small>
+                    <br /> 
+                    <CustomButton onClick={ () => onSpeedDOWN() }>-</CustomButton>
+                    { speed }
+                    <CustomButton onClick={ () => onSpeedUP() }>+</CustomButton>
+                </h3>
 
-            <h3>
-                Vitesse
-                <br /> 
-                <button onClick={ () => onSpeedDOWN() }>-</button>
-                { speed }
-                <button onClick={ () => onSpeedUP() }>+</button>
-            </h3>
-
-            <br />
-            <h3>
-                Température
                 <br />
-                <button onClick={ () => onTempDOWN() }>-</button>
-                { temp }°
-                <button onClick={ () => onTempUP() }>+</button>
-            </h3>
+                <h3>
+                    <small>Température</small>
+                    <br />
+                    <CustomButton onClick={ () => onTempDOWN() }>-</CustomButton>
+                    { temp }°
+                    <CustomButton onClick={ () => onTempUP() }>+</CustomButton>
+                </h3>
+            </div>
         </div>
     );
 }
@@ -195,7 +213,6 @@ function render() {
             
             onTempUP    = { () => store.dispatch(doTempUP(store.getState().paramsState)) } 
             onTempDOWN  = { () => store.dispatch(doTempDOWN(store.getState().paramsState)) } 
-            
         />,
         document.getElementById('root')
     );
