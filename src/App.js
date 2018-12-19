@@ -1,28 +1,89 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { combineReducers, applyMiddleware, createStore } from 'redux';
+//import { createLogger } from 'redux-logger';
+//import './index.css';
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
-  }
+
+// action types
+
+const SPEED_UP = 'SPEED_UP';
+const SPEED_DOWN = 'SPEED_DOWN';
+
+
+// reducers
+
+const params = {
+    speed: 90,
+    autonomie: 300,
+};
+
+function paramsReducer(state = params, action) {
+    switch(action.type) {
+        case SPEED_UP: {
+            return applySpeedUP(state, action);
+        }
+        case SPEED_DOWN: {
+            return applySpeedDOWN(state, action);
+        }
+        default: return state;
+    }
 }
 
-export default App;
+function applySpeedUP(state, action) {
+    const speed = action.params.speed + 10;
+    return speed;
+}
+
+function applySpeedDOWN(state, action) {
+  const speed = action.params.speed - 10;
+  return speed;
+}
+
+
+// action creators
+
+function doSpeedUP() {
+    return {
+        type: SPEED_UP,
+    };
+}
+
+function doSpeedDOWN() {
+    return {
+        type: SPEED_DOWN,
+    };
+}
+
+
+// Logger
+
+//const logger = createLogger();
+
+
+// Store
+
+//const rootReducer = combineReducers({
+//    paramsReducer: paramsReducer
+//});
+
+//const store = createStore(paramsReducer);
+
+
+// View layer
+
+function TheApp() {
+    return 
+        <div>
+          <h2>TOP</h2>
+        </div>;
+}
+
+
+ReactDOM.render(
+    <TheApp />,
+    document.getElementById('root')
+);
+
+//store.subscribe(render);
+//render();
