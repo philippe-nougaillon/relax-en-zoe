@@ -171,14 +171,17 @@ class CustomButton extends Component {
 
 class CustomButtonBox extends Component {
     render() {
-        const { children, value, onClickUP, onClickDOWN } = this.props;
+        const { children, value, unit, onClickUP, onClickDOWN } = this.props;
         return (
             <h3>
                 <small className="text-info">{ children }</small>
                 <br /> 
-                <div class="btn-group">
+                <div className="btn-group">
                     <CustomButton onClick={ onClickDOWN }>-</CustomButton>
-                    <span style={{ padding: 10}}>{ value }</span>
+                    <span style={{ padding: 10}}>
+                        { value }
+                        <small>{ unit }</small>
+                    </span>
                     <CustomButton onClick={ onClickUP }>+</CustomButton>
                 </div>
             </h3>
@@ -203,6 +206,7 @@ function TheApp({ params, onSpeedUP, onSpeedDOWN, onTempUP, onTempDOWN }) {
             <div className="card-body">
                 <CustomButtonBox
                     value= { speed }
+                    unit= " km/h"
                     onClickUP = { onSpeedUP }
                     onClickDOWN = { onSpeedDOWN }>
                     Vitesse
@@ -210,6 +214,7 @@ function TheApp({ params, onSpeedUP, onSpeedDOWN, onTempUP, onTempDOWN }) {
                 
                 <CustomButtonBox
                     value= { temp }
+                    unit="°C"
                     onClickUP = { onTempUP }
                     onClickDOWN = { onTempDOWN }>
                     Température
