@@ -2,7 +2,7 @@
   "name": "autonomie",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://github.com/philippe-nougaillon/AutonomieZoe_ReactRedux",
+  "homepage": "https://philippe-nougaillon.github.io/AutonomieZoe_ReactRedux/",
   "dependencies": {
     "bootstrap": "^4.1.3",
     "gh-pages": "^2.0.1",

@@ -15,6 +15,7 @@ const SPEED_DOWN = 'SPEED_DOWN';
 const TEMP_UP = 'TEMP_UP';
 const TEMP_DOWN = 'TEMP_DOWN';
 
+
 // reducers
 
 const params = {
@@ -168,38 +169,53 @@ class CustomButton extends Component {
     }
 }
 
+class CustomButtonBox extends Component {
+    render() {
+        const { children, value, onClickUP, onClickDOWN } = this.props;
+        return (
+            <h3>
+                <small className="text-info">{ children }</small>
+                <br /> 
+                <div class="btn-group">
+                    <CustomButton onClick={ onClickDOWN }>-</CustomButton>
+                    <span style={{ padding: 10}}>{ value }</span>
+                    <CustomButton onClick={ onClickUP }>+</CustomButton>
+                </div>
+            </h3>
+        )
+    }
+}
+
 
 // View layer
 
-function TheApp({ params, onSpeedDOWN, onSpeedUP, onTempDOWN, onTempUP }) {
+function TheApp({ params, onSpeedUP, onSpeedDOWN, onTempUP, onTempDOWN }) {
     const { speed, temp, autonomie } = params;
     return (
         <div className="card">
-            <div class="card-header">
+            <div className="card-header">
                 <h1>
-                    <small>Autonomie</small>
+                    <small className="text-info">Autonomie</small>
                     <br />
                     { autonomie | 0 } km
                 </h1>
             </div>
             <div className="card-body">
-                <h3>
-                    <small>Vitesse</small>
-                    <br /> 
-                    <CustomButton onClick={ () => onSpeedDOWN() }>-</CustomButton>
-                    { speed }
-                    <CustomButton onClick={ () => onSpeedUP() }>+</CustomButton>
-                </h3>
-
-                <br />
-                <h3>
-                    <small>Température</small>
-                    <br />
-                    <CustomButton onClick={ () => onTempDOWN() }>-</CustomButton>
-                    { temp }°
-                    <CustomButton onClick={ () => onTempUP() }>+</CustomButton>
-                </h3>
+                <CustomButtonBox
+                    value= { speed }
+                    onClickUP = { onSpeedUP }
+                    onClickDOWN = { onSpeedDOWN }>
+                    Vitesse
+                </CustomButtonBox>
+                
+                <CustomButtonBox
+                    value= { temp }
+                    onClickUP = { onTempUP }
+                    onClickDOWN = { onTempDOWN }>
+                    Température
+                </CustomButtonBox>
             </div>
+            <div className="card-footer"></div>
         </div>
     );
 }
@@ -208,8 +224,8 @@ function render() {
     ReactDOM.render(
         <TheApp
             params = { store.getState().paramsState }
-            onSpeedDOWN = { () => store.dispatch(doSpeedDOWN(store.getState().paramsState)) }     
             onSpeedUP   = { () => store.dispatch(doSpeedUP(store.getState().paramsState)) } 
+            onSpeedDOWN = { () => store.dispatch(doSpeedDOWN(store.getState().paramsState)) }     
             
             onTempUP    = { () => store.dispatch(doTempUP(store.getState().paramsState)) } 
             onTempDOWN  = { () => store.dispatch(doTempDOWN(store.getState().paramsState)) } 
