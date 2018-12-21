@@ -5,8 +5,7 @@ import { createLogger } from 'redux-logger';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-//import './index.css';
-//import * as serviceWorker from './serviceWorker';
+import * as serviceWorker from './serviceWorker';
 
 
 // action types
@@ -248,4 +247,4 @@ render();
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: http://bit.ly/CRA-PWA
-//serviceWorker.unregister();
+serviceWorker.register();
