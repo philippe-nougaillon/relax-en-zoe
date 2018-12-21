@@ -20,9 +20,10 @@ const TEMP_DOWN = 'TEMP_DOWN';
 // reducers
 
 const params = {
-    speed: 90,
-    autonomie: 253,
-    temp: 0,
+    charge: 100,
+    speed: 80,
+    temp: 20,
+    autonomie: 292,
 };
 
 function paramsReducer(state = params, action) {
@@ -45,7 +46,7 @@ function paramsReducer(state = params, action) {
 
 function applySpeedUP(state, action) {
     const newSpeed = action.params.speed + 10;
-    const newAutonomie = calculate(100, newSpeed, 0);
+    const newAutonomie = calculate(action.params.charge, newSpeed, action.params.temp);
 
     if (newAutonomie)
         return {...state, speed: newSpeed, autonomie: newAutonomie};
@@ -55,7 +56,7 @@ function applySpeedUP(state, action) {
 
 function applySpeedDOWN(state, action) {
     const newSpeed = action.params.speed - 10;
-    const newAutonomie = calculate(100, newSpeed, 0);
+    const newAutonomie = calculate(action.params.charge, newSpeed, action.params.temp);
 
     if (newAutonomie)
         return {...state, speed: newSpeed, autonomie: newAutonomie};
@@ -65,7 +66,7 @@ function applySpeedDOWN(state, action) {
 
 function applyTempUP(state, action) {
     const newTemp = action.params.temp + 10;
-    const newAutonomie = calculate(100, action.params.speed, newTemp);
+    const newAutonomie = calculate(action.params.charge, action.params.speed, newTemp);
 
     if (newAutonomie)
         return {...state, temp: newTemp, autonomie: newAutonomie};
@@ -75,7 +76,7 @@ function applyTempUP(state, action) {
 
 function applyTempDOWN(state, action) {
     const newTemp = action.params.temp - 10;
-    const newAutonomie = calculate(100, action.params.speed, newTemp);
+    const newAutonomie = calculate(action.params.charge, action.params.speed, newTemp);
 
     if (newAutonomie)
         return {...state, temp: newTemp, autonomie: newAutonomie};
@@ -120,15 +121,17 @@ function doTempDOWN(params) {
 function calculate(charge, speed, temp) {
 
     const consommations = { '50': 5.35, '60': 6.83, '70': 8.83, '80': 11.12, '90': 13.82, '100': 17.75, '110': 22.22, '120': 27.33, '130': 32.7 };
-    const températures  = { '30': -2.5, '20': 0, '10': 2.5, '0': 5, '-10': 7.5, '-20': 10};
+    const températures  = { '40': -5, '30': -2.5, '20': 0, '10': 2.5, '0': 5, '-10': 7.5, '-20': 10};
     
+    let autonomie = 0
+
     // Puissance restante
     const puissance = 41; // Batterie ZOE 4.0 (41kW)
     const battery   = puissance - (puissance * (100 - charge) / 100);
 
     // Consommation 
     const conso = consommations[speed];
-    let autonomie = battery * (parseInt(speed) / conso);
+    autonomie = battery * (speed / conso);
 
     // Impact de la température extérieure
     const impact = températures[temp];
