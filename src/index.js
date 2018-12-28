@@ -45,41 +45,41 @@ function paramsReducer(state = params, action) {
 }
 
 function applySpeedUP(state, action) {
-    const newSpeed = action.params.speed + 10;
-    const newAutonomie = calculate(action.params.charge, newSpeed, action.params.temp);
+    const speed = action.params.speed + 10;
+    const autonomie = calculate(action.params.charge, speed, action.params.temp);
 
-    if (newAutonomie)
-        return {...state, speed: newSpeed, autonomie: newAutonomie};
+    if (autonomie)
+        return {...state, speed, autonomie};
     else
         return state;
 }
 
 function applySpeedDOWN(state, action) {
-    const newSpeed = action.params.speed - 10;
-    const newAutonomie = calculate(action.params.charge, newSpeed, action.params.temp);
+    const speed = action.params.speed - 10;
+    const autonomie = calculate(action.params.charge, speed, action.params.temp);
 
-    if (newAutonomie)
-        return {...state, speed: newSpeed, autonomie: newAutonomie};
+    if (autonomie)
+        return {...state, speed, autonomie};
     else
         return state;
 }
 
 function applyTempUP(state, action) {
-    const newTemp = action.params.temp + 10;
-    const newAutonomie = calculate(action.params.charge, action.params.speed, newTemp);
+    const temp = action.params.temp + 10;
+    const autonomie = calculate(action.params.charge, action.params.speed, temp);
 
-    if (newAutonomie)
-        return {...state, temp: newTemp, autonomie: newAutonomie};
+    if (autonomie)
+        return {...state, temp, autonomie};
     else
         return state;
 }
 
 function applyTempDOWN(state, action) {
-    const newTemp = action.params.temp - 10;
-    const newAutonomie = calculate(action.params.charge, action.params.speed, newTemp);
+    const temp = action.params.temp - 10;
+    const autonomie = calculate(action.params.charge, action.params.speed, temp);
 
-    if (newAutonomie)
-        return {...state, temp: newTemp, autonomie: newAutonomie};
+    if (autonomie)
+        return {...state, temp, autonomie};
     else
         return state;
 }
@@ -87,31 +87,31 @@ function applyTempDOWN(state, action) {
 
 // action creators
 
-function doSpeedUP(params) {
+function doSpeedUP() {
     return {
         type: SPEED_UP,
-        params,
+        params: store.getState().paramsState,
     };
 }
 
-function doSpeedDOWN(params) {
+function doSpeedDOWN() {
     return {
         type: SPEED_DOWN,
-        params,
+        params: store.getState().paramsState,
     };
 }
 
-function doTempUP(params) {
+function doTempUP() {
     return {
         type: TEMP_UP,
-        params,
+        params: store.getState().paramsState,
     };
 }
 
-function doTempDOWN(params) {
+function doTempDOWN() {
     return {
         type: TEMP_DOWN,
-        params,
+        params: store.getState().paramsState,
     };
 }
 
@@ -211,7 +211,7 @@ function TheApp({ params, onSpeedUP, onSpeedDOWN, onTempUP, onTempDOWN }) {
                 <CustomButtonBox
                     value={ speed }
                     unit=" km/h"
-                    onClickUP={ onSpeedUP }
+                    onClickUP  ={ onSpeedUP }
                     onClickDOWN={ onSpeedDOWN }>
                     Vitesse
                 </CustomButtonBox>
@@ -219,7 +219,7 @@ function TheApp({ params, onSpeedUP, onSpeedDOWN, onTempUP, onTempDOWN }) {
                 <CustomButtonBox
                     value={ temp }
                     unit=" °C"
-                    onClickUP={ onTempUP }
+                    onClickUP  ={ onTempUP }
                     onClickDOWN={ onTempDOWN }>
                     Température
                 </CustomButtonBox>
@@ -233,11 +233,11 @@ function render() {
     ReactDOM.render(
         <TheApp
             params = { store.getState().paramsState }
-            onSpeedUP   = { () => store.dispatch(doSpeedUP(store.getState().paramsState)) } 
-            onSpeedDOWN = { () => store.dispatch(doSpeedDOWN(store.getState().paramsState)) }     
+            onSpeedUP   = { () => store.dispatch(doSpeedUP()) } 
+            onSpeedDOWN = { () => store.dispatch(doSpeedDOWN()) }     
             
-            onTempUP    = { () => store.dispatch(doTempUP(store.getState().paramsState)) } 
-            onTempDOWN  = { () => store.dispatch(doTempDOWN(store.getState().paramsState)) } 
+            onTempUP    = { () => store.dispatch(doTempUP()) } 
+            onTempDOWN  = { () => store.dispatch(doTempDOWN()) } 
         />,
         document.getElementById('root')
     );
