@@ -185,7 +185,7 @@ class CustomButtonBox extends Component {
                 <br /> 
                 <div className="btn-group">
                     <CustomButton onClick={ onClickDOWN }>-</CustomButton>
-                    <span style={{ padding: 10}}>
+                    <span style={{ padding: 10, width: 140, textAlign: "center"}}>
                         { value }
                         <small>{ unit }</small>
                     </span>
