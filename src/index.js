@@ -145,7 +145,7 @@ function calculate(charge, speed, temp, heater) {
 
     const consommations = { '50': 5.35, '60': 6.83, '70': 8.83, '80': 11.12, '90': 13.82, '100': 17.75, '110': 22.22, '120': 27.33, '130': 32.7 };
     const températures  = { '40': -5, '30': -2.5, '20': 0, '10': 2.5, '0': 10, '-10': 20};
-    const heatercosts   = { '20': 0 ,'10': 3, '0': 5, '-10': 10};
+    const heatercosts   = { '10': 3, '0': 5, '-10': 10 };
 
     let autonomie = 0
 
@@ -162,12 +162,10 @@ function calculate(charge, speed, temp, heater) {
     autonomie = autonomie - (autonomie * impact / 100); 
 
     // Impact du chauffage
-    if (heater) {
+    if (heater && temp <= 10) {
         const heatercost = heatercosts[temp];
         autonomie = autonomie - (autonomie * heatercost / 100); 
     }
-
-    //console.log("Charge:" + charge, "% | Speed:" + speed + " | Temp:" + temp + "° | Autonomie:" + autonomie);
 
     return autonomie;
 }
@@ -229,6 +227,29 @@ class CustomButtonBox extends Component {
     }
 }
 
+class CustomSwitchBox extends Component {
+    render() {
+        const { children, value, onChange } = this.props;
+        return (
+            <h3>
+            <small className="text-info">
+                <FontAwesomeIcon icon={ faSun } style={{ marginRight: 10 }} />
+                Chauffage</small>
+            <br />
+            <div className="form-check-inline">
+                <label className="form-check-label">
+                    <input  type="checkbox" className="form-check-input"
+                            style={{ marginLeft: 45 }} 
+                            value={ value } 
+                            onChange= { onChange }
+                    />{ children }
+                </label>
+            </div>
+        </h3>
+        )
+    }
+}
+
 function TheApp({ params, onSpeedUP, onSpeedDOWN, onTempUP, onTempDOWN, onHeaterSWITCH }) {
 
     const { speed, temp, heater, autonomie } = params;
@@ -261,20 +282,11 @@ function TheApp({ params, onSpeedUP, onSpeedDOWN, onTempUP, onTempDOWN, onHeater
                     Température
                 </CustomButtonBox>
 
-                <h3>
-                    <small className="text-info">
-                        <FontAwesomeIcon icon={ faSun } style={{ marginRight: 10 }} />
-                        Chauffage</small>
-                    <br />
-                    <div className="form-check-inline">
-                        <label className="form-check-label">
-                            <input  type="checkbox" className="form-check-input" 
-                                    value={ heater } 
-                                    onChange= { onHeaterSWITCH }
-                            />Allumé
-                        </label>
-                    </div>
-                </h3>
+                <CustomSwitchBox 
+                    value= { heater }
+                    onChange= { onHeaterSWITCH } >
+                    Allumé
+                </CustomSwitchBox>
 
             </div>
             <div className="card-footer"></div>
