@@ -75,20 +75,30 @@ function applySpeedDOWN(state, action) {
 
 function applyTempUP(state, action) {
     const temp = action.params.temp + 10;
-    const autonomie = calculate(action.params.charge, action.params.speed, temp, action.params.heater);
+    let heater = action.params.heater;
+
+    // Forcer le chauffage si ça caille J    
+    heater = (temp <= 10);
+
+    const autonomie = calculate(action.params.charge, action.params.speed, temp, heater);
 
     if (autonomie)
-        return {...state, temp, autonomie};
+        return {...state, temp, autonomie, heater};
     else
         return state;
 }
 
 function applyTempDOWN(state, action) {
     const temp = action.params.temp - 10;
-    const autonomie = calculate(action.params.charge, action.params.speed, temp, action.params.heater);
+    let heater = action.params.heater;
+
+    // Forcer le chauffage si ça caille J    
+    heater = (temp <= 10);
+
+    const autonomie = calculate(action.params.charge, action.params.speed, temp, heater);
 
     if (autonomie)
-        return {...state, temp, autonomie};
+        return {...state, temp, autonomie, heater};
     else
         return state;
 }
@@ -241,7 +251,7 @@ class CustomSwitchBox extends Component {
                     <label className="form-check-label">
                         <input  type="checkbox" className="form-check-input"
                                 style={{ marginLeft: 55 }} 
-                                value={ value } 
+                                checked={ value } 
                                 onChange={ onChange }
                         />
                         <small>{ children }</small>
