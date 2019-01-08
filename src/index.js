@@ -257,7 +257,7 @@ function TheApp({ params, onSpeedUP, onSpeedDOWN, onTempUP, onTempDOWN, onHeater
     const { speed, temp, heater, autonomie } = params;
 
     return (
-        <div className="container-fluid">
+        <div className="container">
             <div className="card">
                 <div className="card-header">
                     <h1>
@@ -294,7 +294,7 @@ function TheApp({ params, onSpeedUP, onSpeedDOWN, onTempUP, onTempDOWN, onHeater
                     </CustomSwitchBox>
                 </div>
                 <div className="card-footer">
-                    Autonomie estimée pour une ZOE 4.0
+                    Autonomie estimée (ZOE 4.0)
                 </div>
             </div>
         </div>
