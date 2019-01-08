@@ -240,11 +240,11 @@ class CustomSwitchBox extends Component {
                 <div className="form-check-inline">
                     <label className="form-check-label">
                         <input  type="checkbox" className="form-check-input"
-                                style={{ marginLeft: 45 }} 
+                                style={{ marginLeft: 55 }} 
                                 value={ value } 
-                                onChange= { onChange }
+                                onChange={ onChange }
                         />
-                        { children }
+                        <small>{ children }</small>
                     </label>
                 </div>
             </h3>
@@ -257,42 +257,45 @@ function TheApp({ params, onSpeedUP, onSpeedDOWN, onTempUP, onTempDOWN, onHeater
     const { speed, temp, heater, autonomie } = params;
 
     return (
-        <div className="card">
-            <div className="card-header">
-                <h1>
-                    <small className="text-info">Autonomie</small>
-                    <br />
-                    { autonomie | 0 } km
-                </h1>
-            </div>
-            <div className="card-body">
-                <CustomButtonBox
-                    icon={ faTachometerAlt }
-                    value={ speed }
-                    unit=" km/h"
-                    onClickUP  ={ onSpeedUP }
-                    onClickDOWN={ onSpeedDOWN }>
-                    Vitesse
-                </CustomButtonBox>
-                
-                <CustomButtonBox
-                    icon={ faTemperatureHigh }
-                    value={ temp }
-                    unit=" °C"
-                    onClickUP  ={ onTempUP }
-                    onClickDOWN={ onTempDOWN }>
-                    Température
-                </CustomButtonBox>
+        <div className="container-fluid">
+            <div className="card">
+                <div className="card-header">
+                    <h1>
+                        <small className="text-info">Autonomie</small>
+                        <br />
+                        { autonomie | 0 }
+                        <small> km</small>
+                    </h1>
+                </div>
+                <div className="card-body">
+                    <CustomButtonBox
+                        icon={ faTachometerAlt }
+                        value={ speed }
+                        unit=" km/h"
+                        onClickUP  ={ onSpeedUP }
+                        onClickDOWN={ onSpeedDOWN }>
+                        Vitesse
+                    </CustomButtonBox>
+                    
+                    <CustomButtonBox
+                        icon={ faTemperatureHigh }
+                        value={ temp }
+                        unit=" °C"
+                        onClickUP  ={ onTempUP }
+                        onClickDOWN={ onTempDOWN }>
+                        Température
+                    </CustomButtonBox>
 
-                <CustomSwitchBox
-                    label="Chauffage" 
-                    value={ heater }
-                    onChange={ onHeaterSWITCH } >
-                    Allumé
-                </CustomSwitchBox>
-            </div>
-            <div className="card-footer">
-                Autonomie estimée pour une ZOE 4.0
+                    <CustomSwitchBox
+                        label="Chauffage" 
+                        value={ heater }
+                        onChange={ onHeaterSWITCH } >
+                        Allumé
+                    </CustomSwitchBox>
+                </div>
+                <div className="card-footer">
+                    Autonomie estimée pour une ZOE 4.0
+                </div>
             </div>
         </div>
     );
