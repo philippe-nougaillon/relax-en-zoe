@@ -229,23 +229,25 @@ class CustomButtonBox extends Component {
 
 class CustomSwitchBox extends Component {
     render() {
-        const { children, value, onChange } = this.props;
+        const { children, label, value, onChange } = this.props;
         return (
             <h3>
-            <small className="text-info">
-                <FontAwesomeIcon icon={ faSun } style={{ marginRight: 10 }} />
-                Chauffage</small>
-            <br />
-            <div className="form-check-inline">
-                <label className="form-check-label">
-                    <input  type="checkbox" className="form-check-input"
-                            style={{ marginLeft: 45 }} 
-                            value={ value } 
-                            onChange= { onChange }
-                    />{ children }
-                </label>
-            </div>
-        </h3>
+                <small className="text-info">
+                    <FontAwesomeIcon icon={ faSun } style={{ marginRight: 10 }} />
+                    { label }
+                </small>
+                <br />
+                <div className="form-check-inline">
+                    <label className="form-check-label">
+                        <input  type="checkbox" className="form-check-input"
+                                style={{ marginLeft: 45 }} 
+                                value={ value } 
+                                onChange= { onChange }
+                        />
+                        { children }
+                    </label>
+                </div>
+            </h3>
         )
     }
 }
@@ -282,14 +284,16 @@ function TheApp({ params, onSpeedUP, onSpeedDOWN, onTempUP, onTempDOWN, onHeater
                     Température
                 </CustomButtonBox>
 
-                <CustomSwitchBox 
-                    value= { heater }
-                    onChange= { onHeaterSWITCH } >
+                <CustomSwitchBox
+                    label="Chauffage" 
+                    value={ heater }
+                    onChange={ onHeaterSWITCH } >
                     Allumé
                 </CustomSwitchBox>
-
             </div>
-            <div className="card-footer"></div>
+            <div className="card-footer">
+                Autonomie estimée pour une ZOE 4.0
+            </div>
         </div>
     );
 }
