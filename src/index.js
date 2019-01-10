@@ -77,7 +77,7 @@ function applyTempUP(state, action) {
     const temp = action.params.temp + 10;
     let heater = action.params.heater;
 
-    // Forcer le chauffage si ça caille J    
+    // Allumer le chauffage dès que ça caille un peu    
     heater = (temp <= 10);
 
     const autonomie = calculate(action.params.charge, action.params.speed, temp, heater);
@@ -233,7 +233,7 @@ class CustomButtonBox extends Component {
                     <CustomButton onClick={ onClickUP }>+</CustomButton>
                 </div>
             </h3>
-        )
+        );
     }
 }
 
@@ -250,7 +250,7 @@ class CustomSwitchBox extends Component {
                 <div className="form-check-inline">
                     <label className="form-check-label">
                         <input  type="checkbox" className="form-check-input"
-                                style={{ marginLeft: 55 }} 
+                                style={{ marginLeft: 85 }} 
                                 checked={ value } 
                                 onChange={ onChange }
                         />
