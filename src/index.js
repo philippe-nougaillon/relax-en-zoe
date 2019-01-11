@@ -249,7 +249,8 @@ class CustomSwitchBox extends Component {
                 <br />
                 <div className="form-check-inline">
                     <label className="form-check-label">
-                        <input  type="checkbox" className="form-check-input"
+                        <input  type="checkbox" 
+                                className="form-check-input"
                                 style={{ marginLeft: 85 }} 
                                 checked={ value } 
                                 onChange={ onChange }
@@ -258,7 +259,7 @@ class CustomSwitchBox extends Component {
                     </label>
                 </div>
             </h3>
-        )
+        );
     }
 }
 
@@ -271,7 +272,7 @@ function TheApp({ params, onSpeedUP, onSpeedDOWN, onTempUP, onTempDOWN, onHeater
             <div className="card">
                 <div className="card-header">
                     <h1>
-                        <small className="text-info">Autonomie</small>
+                        <small className="text-info">Autonomie*</small>
                         <br />
                         { autonomie | 0 }
                         <small> km</small>
@@ -304,7 +305,10 @@ function TheApp({ params, onSpeedUP, onSpeedDOWN, onTempUP, onTempDOWN, onHeater
                     </CustomSwitchBox>
                 </div>
                 <div className="card-footer">
-                    Autonomie estimée (ZOE 4.0)
+                    <pre>
+                        * Autonomie estimée (ZOE 4.0)<br />
+                        <a href="https://github.com/philippe-nougaillon/AutonomieZoe_ReactRedux">Code source</a>
+                    </pre>
                 </div>
             </div>
         </div>
