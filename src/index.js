@@ -9,6 +9,7 @@ import * as serviceWorker from './serviceWorker';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTachometerAlt, faTemperatureHigh, faSun } from '@fortawesome/free-solid-svg-icons';
 
+
 // action types
 
 const SPEED_UP = 'SPEED_UP';
@@ -111,7 +112,6 @@ function applyHeaterSWITCH(state, action) {
     return {...state, heater, autonomie};
 }
 
-
 // action creators
 
 function doSpeedUP() {
@@ -198,6 +198,7 @@ const store = createStore(
 );
 
 
+
 // View layer
 
 class CustomButton extends Component {
@@ -262,6 +263,9 @@ class CustomSwitchBox extends Component {
         );
     }
 }
+
+
+// Main loop
 
 function TheApp({ params, onSpeedUP, onSpeedDOWN, onTempUP, onTempDOWN, onHeaterSWITCH }) {
 
