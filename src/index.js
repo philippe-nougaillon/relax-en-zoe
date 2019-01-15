@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
 import { combineReducers, applyMiddleware, createStore } from 'redux';
 import { createLogger } from 'redux-logger';
@@ -6,8 +6,7 @@ import { createLogger } from 'redux-logger';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import * as serviceWorker from './serviceWorker';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTachometerAlt, faTemperatureHigh, faSun } from '@fortawesome/free-solid-svg-icons';
+import App from './components/App'; 
 
 
 // action types
@@ -201,127 +200,10 @@ const store = createStore(
 
 // View layer
 
-class CustomButton extends Component {
-    render() {
-        const { children, onClick } = this.props; 
-        return (
-            <button
-                type="button"
-                className="btn btn-outline-info"
-                onClick={ onClick }>
-                { children }
-            </button>
-        ); 
-    }
-}
-
-class CustomButtonBox extends Component {
-    render() {
-        const { children, value, unit, icon, onClickUP, onClickDOWN } = this.props;
-        return (
-            <h3>
-                <small className="text-info">
-                    <FontAwesomeIcon icon={ icon } style={{ marginRight: 10 }} />
-                    { children }
-                </small>
-                <br /> 
-                <div className="btn-group">
-                    <CustomButton onClick={ onClickDOWN }>-</CustomButton>
-                    <span style={{ padding: 10, width: 150, textAlign: "center"}}>
-                        { value }
-                        <small>{ unit }</small>
-                    </span>
-                    <CustomButton onClick={ onClickUP }>+</CustomButton>
-                </div>
-            </h3>
-        );
-    }
-}
-
-class CustomSwitchBox extends Component {
-    render() {
-        const { children, label, value, onChange } = this.props;
-        return (
-            <h3>
-                <small className="text-info">
-                    <FontAwesomeIcon icon={ faSun } style={{ marginRight: 10 }} />
-                    { label }
-                </small>
-                <br />
-                <div className="form-check-inline">
-                    <label className="form-check-label">
-                        <input  type="checkbox" 
-                                className="form-check-input"
-                                style={{ marginLeft: 85 }} 
-                                checked={ value } 
-                                onChange={ onChange }
-                        />
-                        <small>{ children }</small>
-                    </label>
-                </div>
-            </h3>
-        );
-    }
-}
-
-
-// Main loop
-
-function TheApp({ params, onSpeedUP, onSpeedDOWN, onTempUP, onTempDOWN, onHeaterSWITCH }) {
-
-    const { speed, temp, heater, autonomie } = params;
-
-    return (
-        <div className="container">
-            <div className="card">
-                <div className="card-header">
-                    <h1>
-                        <small className="text-info">Autonomie*</small>
-                        <br />
-                        { autonomie | 0 }
-                        <small> km</small>
-                    </h1>
-                </div>
-                <div className="card-body">
-                    <CustomButtonBox
-                        icon={ faTachometerAlt }
-                        value={ speed }
-                        unit=" km/h"
-                        onClickUP  ={ onSpeedUP }
-                        onClickDOWN={ onSpeedDOWN }>
-                        Vitesse
-                    </CustomButtonBox>
-                    
-                    <CustomButtonBox
-                        icon={ faTemperatureHigh }
-                        value={ temp }
-                        unit=" °C"
-                        onClickUP  ={ onTempUP }
-                        onClickDOWN={ onTempDOWN }>
-                        Température
-                    </CustomButtonBox>
-
-                    <CustomSwitchBox
-                        label="Chauffage" 
-                        value={ heater }
-                        onChange={ onHeaterSWITCH } >
-                        Allumé
-                    </CustomSwitchBox>
-                </div>
-                <div className="card-footer">
-                    <pre>
-                        * Autonomie estimée (ZOE 4.0)<br />
-                        <a href="https://github.com/philippe-nougaillon/AutonomieZoe_ReactRedux">Code source</a>
-                    </pre>
-                </div>
-            </div>
-        </div>
-    );
-}
     
 function render() {
     ReactDOM.render(
-        <TheApp
+        <App
             params = { store.getState().paramsState }
             onSpeedUP   = { () => store.dispatch(doSpeedUP()) } 
             onSpeedDOWN = { () => store.dispatch(doSpeedDOWN()) }     
