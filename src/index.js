@@ -13,7 +13,6 @@ import { doTempUP } from './actions/tempUp';
 import { doTempDOWN } from './actions/tempDown';
 import { doHeaterSWITCH } from './actions/heaterSwitch';
 
-    
 function render() {
     ReactDOM.render(
         <App
@@ -32,7 +31,6 @@ function render() {
 
 store.subscribe(render);
 render();
-
 
 
 // If you want your app to work offline and load faster, you can change
