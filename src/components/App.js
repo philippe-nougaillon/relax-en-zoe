@@ -5,7 +5,7 @@ import { faTachometerAlt, faTemperatureHigh } from '@fortawesome/free-solid-svg-
 import CustomButtonBox from './CustomButtonBox'; 
 import CustomSwitchBox from './CustomSwitchBox'; 
 
-function App({ params, onSpeedUP, onSpeedDOWN, onTempUP, onTempDOWN, onHeaterSWITCH }) {
+const App = ({ params, onSpeedUP, onSpeedDOWN, onTempUP, onTempDOWN, onHeaterSWITCH }) => {
 
     const { speed, temp, heater, autonomie } = params;
 
@@ -54,7 +54,6 @@ function App({ params, onSpeedUP, onSpeedDOWN, onTempUP, onTempDOWN, onHeaterSWI
                 </div>
             </div>
         </div>
-    );
-}
+    )}
 
 export default App;
