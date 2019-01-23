@@ -3,7 +3,6 @@ import React, {Component} from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSun } from '@fortawesome/free-solid-svg-icons';
 
-
 class CustomSwitchBox extends Component {
     render() {
         const { children, label, value, onChange } = this.props;
@@ -14,14 +13,16 @@ class CustomSwitchBox extends Component {
                     { label }
                 </small>
                 <br />
-                <div className="form-check-inline">
-                    <label className="form-check-label">
-                        <input  type="checkbox" 
-                                className="form-check-input"
-                                style={{ marginLeft: 85 }} 
-                                checked={ value } 
-                                onChange={ onChange }
-                        />
+
+                <div className="custom-control custom-switch"
+                     style={{ marginLeft: 85 }} >
+                    <input type="checkbox" 
+                            className="custom-control-input" 
+                            id="switch1"
+                            checked={ value } 
+                            onChange={ onChange }
+                            />
+                    <label className="custom-control-label" for="switch1">
                         <small>{ children }</small>
                     </label>
                 </div>
