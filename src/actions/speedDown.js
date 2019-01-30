@@ -1,8 +1,7 @@
 import { SPEED_DOWN } from '../constants/actionTypes';
 
-const doSpeedDOWN = params => ({
+const doSpeedDOWN = () => ({
         type: SPEED_DOWN,
-        params,
 });
 
 export { 

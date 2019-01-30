@@ -1,8 +1,7 @@
 import { TEMP_UP } from '../constants/actionTypes';
 
-const doTempUP = params => ({
+const doTempUP = () => ({
         type: TEMP_UP,
-        params,
 });
 
 export { 

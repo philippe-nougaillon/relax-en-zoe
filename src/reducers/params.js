@@ -13,8 +13,8 @@ const params = {
 // reducers
 
 function applySpeedUP(state, action) {
-    const speed = action.params.speed + 10;
-    const autonomie = calculate(action.params.charge, speed, action.params.temp, action.params.heater);
+    const speed = state.speed + 10;
+    const autonomie = calculate(state.charge, speed, state.temp, state.heater);
 
     if (autonomie)
         return {...state, speed, autonomie};
@@ -23,8 +23,8 @@ function applySpeedUP(state, action) {
 }
 
 function applySpeedDOWN(state, action) {
-    const speed = action.params.speed - 10;
-    const autonomie = calculate(action.params.charge, speed, action.params.temp, action.params.heater);
+    const speed = state.speed - 10;
+    const autonomie = calculate(state.charge, speed, state.temp, state.heater);
 
     if (autonomie)
         return {...state, speed, autonomie};
@@ -33,13 +33,13 @@ function applySpeedDOWN(state, action) {
 }
 
 function applyTempUP(state, action) {
-    const temp = action.params.temp + 10;
-    let heater = action.params.heater;
+    const temp = state.temp + 10;
+    let heater = state.heater;
 
     // Allumer le chauffage dès que ça caille un peu    
     heater = (temp <= 10);
 
-    const autonomie = calculate(action.params.charge, action.params.speed, temp, heater);
+    const autonomie = calculate(state.charge, state.speed, temp, heater);
 
     if (autonomie)
         return {...state, temp, autonomie, heater};
@@ -48,13 +48,13 @@ function applyTempUP(state, action) {
 }
 
 function applyTempDOWN(state, action) {
-    const temp = action.params.temp - 10;
-    let heater = action.params.heater;
+    const temp = state.temp - 10;
+    let heater = state.heater;
 
     // Forcer le chauffage si ça caille J    
     heater = (temp <= 10);
 
-    const autonomie = calculate(action.params.charge, action.params.speed, temp, heater);
+    const autonomie = calculate(state.charge, state.speed, temp, heater);
 
     if (autonomie)
         return {...state, temp, autonomie, heater};
@@ -64,8 +64,8 @@ function applyTempDOWN(state, action) {
 
 function applyHeaterSWITCH(state, action) {
 
-    const heater = !action.params.heater;
-    const autonomie = calculate(action.params.charge, action.params.speed, action.params.temp, heater);
+    const heater = !state.heater;
+    const autonomie = calculate(state.charge, state.speed, state.temp, heater);
 
     return {...state, heater, autonomie};
 }

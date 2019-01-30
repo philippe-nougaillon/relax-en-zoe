@@ -1,8 +1,7 @@
 import { TEMP_DOWN } from '../constants/actionTypes';
 
-const doTempDOWN = params => ({
+const doTempDOWN = () => ({
         type: TEMP_DOWN,
-        params,
 });
 
 export { 
