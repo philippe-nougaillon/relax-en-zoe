@@ -22,7 +22,7 @@ class CustomSwitchBox extends Component {
                             checked={ value } 
                             onChange={ onChange }
                             />
-                    <label className="custom-control-label" for="switch1">
+                    <label className="custom-control-label" htmlFor="switch1">
                         <small>{ children }</small>
                     </label>
                 </div>

@@ -1,25 +1,43 @@
 import React from 'react';
+import { connect } from 'react-redux';
+
+import { doSpeedUP } from '../actions/speedUp';
+import { doSpeedDOWN } from '../actions/speedDown';
+import { doTempUP } from '../actions/tempUp';
+import { doTempDOWN } from '../actions/tempDown';
+import { doHeaterSWITCH } from '../actions/heaterSwitch';
 
 import { faTachometerAlt, faTemperatureHigh } from '@fortawesome/free-solid-svg-icons';
 
 import CustomButtonBox from './CustomButtonBox'; 
 import CustomSwitchBox from './CustomSwitchBox'; 
+import Header from './Header';
+import Footer from './Footer';
+
+function mapStateToProps(state) {
+    return {
+        params: state.paramsState,
+    };
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        onSpeedUP: () => dispatch(doSpeedUP()),
+        onSpeedDOWN: () => dispatch(doSpeedDOWN()),
+        onTempUP: () => dispatch(doTempUP()),
+        onTempDOWN: () => dispatch(doTempDOWN()),
+        onHeaterSWITCH: () => dispatch(doHeaterSWITCH()),
+    }
+}
 
 const App = ({ params, onSpeedUP, onSpeedDOWN, onTempUP, onTempDOWN, onHeaterSWITCH }) => {
 
-    const { speed, temp, heater, autonomie } = params;
+    const { speed, temp, heater } = params;
 
     return (
         <div className="container">
             <div className="card">
-                <div className="card-header">
-                    <h1>
-                        <small className="text-info">Autonomie*</small>
-                        <br />
-                        { autonomie | 0 }
-                        <small> km</small>
-                    </h1>
-                </div>
+                <Header />
                 <div className="card-body">
                     <CustomButtonBox
                         icon={ faTachometerAlt }
@@ -46,14 +64,9 @@ const App = ({ params, onSpeedUP, onSpeedDOWN, onTempUP, onTempDOWN, onHeaterSWI
                         Allumé
                     </CustomSwitchBox>
                 </div>
-                <div className="card-footer">
-                    <pre>
-                        * Autonomie estimée (ZOE 4.0)<br />
-                        <a href="https://github.com/philippe-nougaillon/AutonomieZoe_ReactRedux">Code source</a>
-                    </pre>
-                </div>
+                <Footer />
             </div>
         </div>
     )}
 
-export default App;
+export default connect(mapStateToProps, mapDispatchToProps)(App);
