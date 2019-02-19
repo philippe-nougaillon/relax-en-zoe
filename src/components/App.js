@@ -14,6 +14,7 @@ import CustomSwitchBox from './CustomSwitchBox';
 import Header from './Header';
 import Footer from './Footer';
 
+
 function mapStateToProps(state) {
     return {
         params: state.paramsState,
