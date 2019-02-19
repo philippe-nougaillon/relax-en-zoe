@@ -7,7 +7,7 @@ class CustomButton extends Component {
             <button
                 type="button"
                 className="btn btn-outline-info"
-                onClick={ onClick }>
+                onClick={ onClick } >
                 { children }
             </button>
         ); 

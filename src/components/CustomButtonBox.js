@@ -6,7 +6,7 @@ import CustomButton from './CustomButton';
 
 class CustomButtonBox extends Component {
     render() {
-        const { children, value, unit, icon, onClickUP, onClickDOWN } = this.props;
+        const { children, value, unit, icon, onClickUP, onClickDOWN} = this.props;
         return (
             <h3>
                 <small className="text-info">
@@ -15,12 +15,14 @@ class CustomButtonBox extends Component {
                 </small>
                 <br /> 
                 <div className="btn-group">
-                    <CustomButton onClick={ onClickDOWN }>-</CustomButton>
+                    <CustomButton onClick={ onClickDOWN } >-</CustomButton>
+
                     <span style={{ padding: 10, width: 150, textAlign: "center"}}>
                         { value }
                         <small>{ unit }</small>
                     </span>
-                    <CustomButton onClick={ onClickUP }>+</CustomButton>
+                    
+                    <CustomButton onClick={ onClickUP } >+</CustomButton>
                 </div>
             </h3>
         );

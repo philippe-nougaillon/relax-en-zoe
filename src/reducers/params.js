@@ -3,11 +3,11 @@ import { SPEED_UP, SPEED_DOWN, TEMP_UP, TEMP_DOWN, HEATER_SWITCH } from '../cons
 // initial states
 
 const params = {
+    autonomie: 292,
     charge: 100,
     speed:  80,
     temp:   20,
     heater: false,
-    autonomie: 292,
 };
 
 // reducers
@@ -36,10 +36,10 @@ function applyTempUP(state, action) {
     const temp = state.temp + 10;
     let heater = state.heater;
 
+    const autonomie = calculate(state.charge, state.speed, temp, heater);
+
     // Allumer le chauffage dès que ça caille un peu    
     heater = (temp <= 10);
-
-    const autonomie = calculate(state.charge, state.speed, temp, heater);
 
     if (autonomie)
         return {...state, temp, autonomie, heater};
@@ -51,10 +51,10 @@ function applyTempDOWN(state, action) {
     const temp = state.temp - 10;
     let heater = state.heater;
 
+    const autonomie = calculate(state.charge, state.speed, temp, heater);
+
     // Forcer le chauffage si ça caille J    
     heater = (temp <= 10);
-
-    const autonomie = calculate(state.charge, state.speed, temp, heater);
 
     if (autonomie)
         return {...state, temp, autonomie, heater};
