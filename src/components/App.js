@@ -37,8 +37,12 @@ const App = ({ params, onSpeedUP, onSpeedDOWN, onTempUP, onTempDOWN, onHeaterSWI
 
     return (
         <div className="container">
+            <br />
+
             <div className="card">
+
                 <Header />
+
                 <div className="card-body">
                     <CustomButtonBox
                         icon={ faTachometerAlt }

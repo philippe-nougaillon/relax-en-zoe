@@ -1,20 +1,23 @@
-import { SPEED_UP, SPEED_DOWN, TEMP_UP, TEMP_DOWN, HEATER_SWITCH } from '../constants/actionTypes';
+import { SPEED_UP, SPEED_DOWN, TEMP_UP, TEMP_DOWN, HEATER_SWITCH, POWER_UP, POWER_DOWN, TIME_UP, TIME_DOWN } from '../constants/actionTypes';
 
 // initial states
 
 const params = {
     autonomie: 292,
-    charge: 100,
     speed:  80,
     temp:   20,
     heater: false,
+    power: 22,
+    minutes: 60,
+    charge: 45,
+ 
 };
 
 // reducers
 
 function applySpeedUP(state, action) {
     const speed = state.speed + 10;
-    const autonomie = calculate(state.charge, speed, state.temp, state.heater);
+    const autonomie = calculate(100, speed, state.temp, state.heater);
 
     if (autonomie)
         return {...state, speed, autonomie};
@@ -24,7 +27,7 @@ function applySpeedUP(state, action) {
 
 function applySpeedDOWN(state, action) {
     const speed = state.speed - 10;
-    const autonomie = calculate(state.charge, speed, state.temp, state.heater);
+    const autonomie = calculate(100, speed, state.temp, state.heater);
 
     if (autonomie)
         return {...state, speed, autonomie};
@@ -36,7 +39,7 @@ function applyTempUP(state, action) {
     const temp = state.temp + 10;
     let heater = state.heater;
 
-    const autonomie = calculate(state.charge, state.speed, temp, heater);
+    const autonomie = calculate(100, state.speed, temp, heater);
 
     // Allumer le chauffage dès que ça caille un peu    
     heater = (temp <= 10);
@@ -51,7 +54,7 @@ function applyTempDOWN(state, action) {
     const temp = state.temp - 10;
     let heater = state.heater;
 
-    const autonomie = calculate(state.charge, state.speed, temp, heater);
+    const autonomie = calculate(100, state.speed, temp, heater);
 
     // Forcer le chauffage si ça caille J    
     heater = (temp <= 10);
@@ -65,10 +68,39 @@ function applyTempDOWN(state, action) {
 function applyHeaterSWITCH(state, action) {
 
     const heater = !state.heater;
-    const autonomie = calculate(state.charge, state.speed, state.temp, heater);
+    const autonomie = calculate(100, state.speed, state.temp, heater);
 
     return {...state, heater, autonomie};
 }
+
+function applyPowerUP(state, action) {
+    const power = state.power + 1;
+
+    return {...state, power};
+}
+
+function applyPowerDOWN(state, action) {
+    const power = state.power - 1;
+
+    return {...state, power};
+}
+
+function applyTimeUP(state, action) {
+    const minutes = state.minutes + 10;
+
+    const charge = calculate_charge(state.power, minutes);
+
+    return {...state, minutes, charge};
+}
+
+function applyTimeDOWN(state, action) {
+    const minutes = state.minutes - 10;
+
+    const charge = calculate_charge(state.power, minutes);
+
+    return {...state, minutes, charge};
+}
+
 
 // Calculations 
     
@@ -101,7 +133,19 @@ function calculate(charge, speed, temp, heater) {
     return autonomie;
 }
 
+function calculate_charge(power, minutes) {
 
+    const battery = 43;
+
+    // on calcule la puissance délivrée par minute * temps passé en charge
+    const puissance_delivrée = (((power * 1000)/60) * minutes) / 1000;
+
+    // on perd 20 % environ
+    const puissance_accumulée = puissance_delivrée - ((puissance_delivrée * 20) / 100);
+
+    return ((puissance_accumulée / battery) * 100);
+
+}
 
 // dispatch reducers
 
@@ -121,6 +165,18 @@ function paramsReducer(state = params, action) {
         }
         case HEATER_SWITCH: {
             return applyHeaterSWITCH(state, action);
+        }
+        case POWER_UP: {
+            return applyPowerUP(state, action);
+        }
+        case POWER_DOWN: {
+            return applyPowerDOWN(state, action);
+        }
+        case TIME_UP: {
+            return applyTimeUP(state, action);
+        }
+        case TIME_DOWN: {
+            return applyTimeDOWN(state, action);
         }
         default: return state;
     }
