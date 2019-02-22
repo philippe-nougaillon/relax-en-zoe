@@ -58,7 +58,7 @@ const Charge = ({ params, onPowerUP, onPowerDOWN, onTimeUP, onTimeDOWN }) => {
 
                 </div>
                 <div className="card-footer">
-                    Rappel des temps de charge (0 à 100%) : 
+                    Temps de charge (0 à 100%) : 
                     <ul>
                         <li>22 kW/h => 2h40</li>
                         <li>11 kW/h => 5h</li>

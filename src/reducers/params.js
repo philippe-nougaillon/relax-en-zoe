@@ -9,8 +9,7 @@ const params = {
     heater: false,
     power: 22,
     minutes: 60,
-    charge: 45,
- 
+    charge: 40,
 };
 
 // reducers
@@ -76,13 +75,17 @@ function applyHeaterSWITCH(state, action) {
 function applyPowerUP(state, action) {
     const power = state.power + 1;
 
-    return {...state, power};
+    const charge = calculate_charge(power, state.minutes);
+
+    return {...state, power, charge};
 }
 
 function applyPowerDOWN(state, action) {
     const power = state.power - 1;
 
-    return {...state, power};
+    const charge = calculate_charge(power, state.minutes);
+
+    return {...state, power, charge};
 }
 
 function applyTimeUP(state, action) {
