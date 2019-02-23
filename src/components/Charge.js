@@ -34,7 +34,7 @@ const Charge = ({ params, onPowerUP, onPowerDOWN, onTimeUP, onTimeDOWN }) => {
             <div className="card">
                 <div className="card-header">
                     <h1>
-                        Charge { charge | 0 }%
+                        Charge +{ charge | 0 }%
                     </h1>
                 </div>
                 <div className="card-body">
