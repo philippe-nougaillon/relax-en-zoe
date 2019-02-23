@@ -11,7 +11,7 @@ const Root = ({ store }) => (
     <Router>
       <div>
         <nav className="navbar navbar-expand-sm bg-dark navbar-dark">
-          <a className="navbar-brand" href="#">ZOE 4.0</a>
+          <a className="navbar-brand" href="/">ZOE 4.0</a>
 
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
             <span class="navbar-toggler-icon"></span>
