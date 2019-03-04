@@ -33,6 +33,9 @@ const Root = ({ store }) => (
         </nav>
 
         <div className="content">
+          <h3>
+            Welcome !
+          </h3>
           <Route exact path="/" component={Charge} />
           <Route path="/autonomie" component={App} />
         </div>
