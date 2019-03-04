@@ -5,6 +5,7 @@ import { BrowserRouter as HashRouter, Route, NavLink } from 'react-router-dom';
 
 import App from './App'
 import Charge from './Charge';
+import Bornes from './Bornes';
 
 const Root = ({ store }) => (
   <Provider store={store}>
@@ -36,6 +37,7 @@ const Root = ({ store }) => (
           {/* <Route exact path="/" component={ App } /> */}
           <Route exact path={`/`} render={ (routerProps) => <App routerProps={routerProps} />} />
           <Route path="/charge" component={ Charge } />
+          <Route path="/bornes" component={ Bornes } />
         </div>
       </div>
     </HashRouter>
