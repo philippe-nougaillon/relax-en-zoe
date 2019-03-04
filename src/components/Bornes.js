@@ -13,7 +13,7 @@ class Bornes extends Component {
     super(props);
 
     this.state = {
-      kms: 50,
+      kms: 100,
       //puissance: 1,
       limit: 50,
       result: [],
@@ -31,8 +31,13 @@ class Bornes extends Component {
   }
 
   setBornesResult(result) {
-    this.setState({ result });
-    // console.log("Result size: " + result.length);
+    //console.log("Result size: " + result.length);
+  
+    if (result.length) {
+        this.setState({ result });
+    } else {
+        this.setState({ result: [] });
+    }
   }
 
   setLoading(isLoading) {
@@ -123,7 +128,7 @@ class Bornes extends Component {
 
                     { !loading &&
                         <div className="colored_div">
-                            { bornes.length } bornes dans un rayon de { kms | 0 } km
+                            { bornes.length } prises dans un rayon de { kms | 0 } km
                         </div>
                     }
                 </div>
@@ -137,7 +142,7 @@ class Bornes extends Component {
                     />   */}
 
                     <form>
-                        Filtrer: <input
+                        Filtre: <input
                             type="text"
                             onChange={ this.onSearchChange }
                             value={ searchTerm }
@@ -155,7 +160,7 @@ class Bornes extends Component {
                                 list ={ bornes }
                                 limit={ limit }
                             />
-                            Liste limitée aux { limit } bornes les plus proches...
+                            Liste limitée aux { limit } prises les plus proches...
                         </span>
                     }
                 </div>

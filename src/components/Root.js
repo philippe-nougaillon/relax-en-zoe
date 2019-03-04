@@ -14,11 +14,11 @@ const Root = ({ store }) => (
         <nav className="navbar navbar-expand-sm bg-dark navbar-dark">
           <a className="navbar-brand" href="/">ZOE 4.0</a>
 
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-            <span class="navbar-toggler-icon"></span>
+          <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+            <span className="navbar-toggler-icon"></span>
           </button>
           
-          <div class="collapse navbar-collapse" id="collapsibleNavbar">
+          <div className="collapse navbar-collapse" id="collapsibleNavbar">
             <ul className="navbar-nav">
               <li className="nav-item">
               <NavLink exact className="nav-link" activeClassName="active" to="/">Autonomie</NavLink>
