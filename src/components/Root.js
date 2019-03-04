@@ -20,10 +20,10 @@ const Root = ({ store }) => (
           <div class="collapse navbar-collapse" id="collapsibleNavbar">
             <ul className="navbar-nav">
               <li className="nav-item">
-              <NavLink exact className="nav-link" activeClassName="active" to="/">Charge</NavLink>
+              <NavLink exact className="nav-link" activeClassName="active" to="/">Autonomie</NavLink>
               </li>
               <li className="nav-item">
-                <NavLink className="nav-link" activeClassName="active" to="/autonomie">Autonomie</NavLink>
+                <NavLink className="nav-link" activeClassName="active" to="/charge">Charge</NavLink>
               </li>
               <li className="nav-item">
                 <NavLink className="nav-link" activeClassName="active" to="/bornes">Bornes</NavLink>
@@ -33,11 +33,9 @@ const Root = ({ store }) => (
         </nav>
 
         <div className="content">
-          <h3>
-            Welcome !
-          </h3>
-          <Route exact path="/" component={Charge} />
-          <Route path="/autonomie" component={App} />
+          {/* <Route exact path="/" component={ App } /> */}
+          <Route exact path={`/`} render={ (routerProps) => <App routerProps={routerProps} />} />
+          <Route path="/charge" component={ Charge } />
         </div>
       </div>
     </HashRouter>
