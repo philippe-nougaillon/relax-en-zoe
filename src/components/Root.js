@@ -31,8 +31,10 @@ const Root = ({ store }) => (
             </ul>
           </div>
         </nav>
-        <Route exact path="/" component={App} />
-        <Route path="/charge" component={Charge} />
+        <div className="content">
+          <Route exact path="/" component={App} />
+          <Route path="/charge" component={Charge} />
+        </div>
       </div>
     </Router>
   </Provider>
