@@ -1,14 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Provider } from 'react-redux';
-import { BrowserRouter as Router, Route, NavLink } from 'react-router-dom';
+import { BrowserRouter as HashRouter, Route, NavLink } from 'react-router-dom';
 
 import App from './App'
 import Charge from './Charge';
 
 const Root = ({ store }) => (
   <Provider store={store}>
-    <Router>
+    <HashRouter>
       <div>
         <nav className="navbar navbar-expand-sm bg-dark navbar-dark">
           <a className="navbar-brand" href="/">ZOE 4.0</a>
@@ -20,10 +20,10 @@ const Root = ({ store }) => (
           <div class="collapse navbar-collapse" id="collapsibleNavbar">
             <ul className="navbar-nav">
               <li className="nav-item">
-                <NavLink exact className="nav-link" activeClassName="active" to="/">Autonomie</NavLink>
+              <NavLink exact className="nav-link" activeClassName="active" to="/">Charge</NavLink>
               </li>
               <li className="nav-item">
-                <NavLink className="nav-link" activeClassName="active" to="/charge">Charge</NavLink>
+                <NavLink className="nav-link" activeClassName="active" to="/autonomie">Autonomie</NavLink>
               </li>
               <li className="nav-item">
                 <NavLink className="nav-link" activeClassName="active" to="/bornes">Bornes</NavLink>
@@ -31,12 +31,13 @@ const Root = ({ store }) => (
             </ul>
           </div>
         </nav>
+
         <div className="content">
-          <Route exact path="/" component={App} />
-          <Route path="/charge" component={Charge} />
+          <Route exact path="/" component={Charge} />
+          <Route path="/autonomie" component={App} />
         </div>
       </div>
-    </Router>
+    </HashRouter>
   </Provider>
 )
 
