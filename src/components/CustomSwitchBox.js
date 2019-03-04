@@ -5,30 +5,34 @@ import { faSun } from '@fortawesome/free-solid-svg-icons';
 
 class CustomSwitchBox extends Component {
     render() {
-        const { children, label, value, onChange } = this.props;
-        return (
-            <div>
-                <h3>
-                    <small className="text-info">
-                        <FontAwesomeIcon icon={ faSun } style={{ marginRight: 10 }} />
-                        { label }
-                    </small>
-                    <br />
 
-                    <div className="custom-control custom-switch"
-                        style={{ marginLeft: 85 }} >
+        const { children, label, value, onChange } = this.props;
+        
+        return (
+            <h3>
+                <div className="btn-group">
+                    <span style={{ padding: 10, width: 250, textAlign: "center"}}>
+                        <span className="text-info">
+                            <small>
+                                <FontAwesomeIcon icon={ faSun } style={{ marginRight: 10 }} />
+                                { label }
+                            </small>
+                        </span>
+                        <br />
+                        
                         <input type="checkbox" 
                                 className="custom-control-input" 
                                 id="switch1"
                                 checked={ value } 
                                 onChange={ onChange }
                         />
+
                         <label className="custom-control-label" htmlFor="switch1">
-                            <small>{ children }</small>
+                            { value ? "on" : "off" }
                         </label>
-                    </div>
-                </h3>
-            </div>
+                    </span>
+                </div>
+            </h3>
         );
     }
 }
