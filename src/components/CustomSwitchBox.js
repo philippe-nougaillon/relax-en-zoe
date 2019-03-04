@@ -6,7 +6,7 @@ import { faSun } from '@fortawesome/free-solid-svg-icons';
 class CustomSwitchBox extends Component {
     render() {
 
-        const { children, label, value, onChange } = this.props;
+        const { label, value, onChange } = this.props;
         
         return (
             <h3>

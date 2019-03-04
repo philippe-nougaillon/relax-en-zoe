@@ -66,7 +66,6 @@ const App = ({ params, onSpeedUP, onSpeedDOWN, onTempUP, onTempDOWN, onHeaterSWI
                         label="Chauffage" 
                         value={ heater }
                         onChange={ onHeaterSWITCH } >
-                        Allumé
                     </CustomSwitchBox>
                 </div>
                 <Footer />
