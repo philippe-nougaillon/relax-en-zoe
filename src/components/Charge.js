@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { faPlug, faHourglassStart } from '@fortawesome/free-solid-svg-icons';
+import { faChargingStation, faHourglassStart } from '@fortawesome/free-solid-svg-icons';
 import CustomButtonBox from './CustomButtonBox'; 
 
 import { doPowerUP } from '../actions/powerUp';
@@ -36,15 +36,16 @@ const Charge = ({ params, onPowerUP, onPowerDOWN, onTimeUP, onTimeDOWN }) => {
                     <h1>
                         <small className="text-info">Charge</small>
                         <br />
-                         + { charge | 0 }% 
+                         + { charge }% 
                         <small><small style={{ marginLeft: 15 }}>
                             (~{ (300 * charge) / 100 | 0 } km)
                         </small></small>
                     </h1>
                 </div>
+
                 <div className="card-body">
                     <CustomButtonBox
-                        icon={ faPlug }
+                        icon={ faChargingStation }
                         value={ power }
                         unit=" kW/h"
                         onClickUP  ={ onPowerUP }
@@ -60,8 +61,8 @@ const Charge = ({ params, onPowerUP, onPowerDOWN, onTimeUP, onTimeDOWN }) => {
                         onClickDOWN={ onTimeDOWN }>
                         Temps
                     </CustomButtonBox>
-
                 </div>
+
                 <div className="card-footer">
                     Temps de charge (0 à 100%): 
                     <ul>
@@ -70,6 +71,7 @@ const Charge = ({ params, onPowerUP, onPowerDOWN, onTimeUP, onTimeDOWN }) => {
                         <li>7 kW/h => 10h</li>
                         <li>3 kW/h => 25h</li>
                     </ul>
+                    Notez qu'au delà de 80%, la charge est 2 fois plus longue !
                 </div>
             </div>
         </div>

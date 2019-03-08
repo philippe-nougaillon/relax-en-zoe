@@ -13,6 +13,7 @@ const params = {
 };
 
 // reducers
+// AUTONOMIE
 
 function applySpeedUP(state, action) {
     const speed = state.speed + 10;
@@ -40,7 +41,7 @@ function applyTempUP(state, action) {
 
     const autonomie = calculate(100, state.speed, temp, heater);
 
-    // Allumer le chauffage dès que ça caille un peu    
+    // Allumer le chauffage ?     
     heater = (temp <= 10);
 
     if (autonomie)
@@ -55,7 +56,6 @@ function applyTempDOWN(state, action) {
 
     const autonomie = calculate(100, state.speed, temp, heater);
 
-    // Forcer le chauffage si ça caille J    
     heater = (temp <= 10);
 
     if (autonomie)
@@ -72,36 +72,50 @@ function applyHeaterSWITCH(state, action) {
     return {...state, heater, autonomie};
 }
 
-function applyPowerUP(state, action) {
-    const power = state.power + 1;
+// CHARGE 
 
+function applyPowerUP(state, action) {
+
+    const power = state.power + 1;
     const charge = calculate_charge(power, state.minutes);
 
-    return {...state, power, charge};
+    if (charge)
+        return {...state, power, charge}
+    else   
+        return state;
 }
 
 function applyPowerDOWN(state, action) {
-    const power = state.power - 1;
 
+    const power = state.power - 1;
     const charge = calculate_charge(power, state.minutes);
 
-    return {...state, power, charge};
+    if (charge)
+        return {...state, power, charge}
+    else   
+        return state;
 }
 
 function applyTimeUP(state, action) {
-    const minutes = state.minutes + 10;
 
+    const minutes = state.minutes + 10;
     const charge = calculate_charge(state.power, minutes);
 
-    return {...state, minutes, charge};
+    if (charge)
+        return {...state, minutes, charge};
+    else   
+        return state;
 }
 
 function applyTimeDOWN(state, action) {
-    const minutes = state.minutes - 10;
 
+    const minutes = state.minutes - 10;
     const charge = calculate_charge(state.power, minutes);
 
-    return {...state, minutes, charge};
+    if (charge)
+        return {...state, minutes, charge};
+    else   
+        return state;
 }
 
 
@@ -138,16 +152,21 @@ function calculate(charge, speed, temp, heater) {
 
 function calculate_charge(power, minutes) {
 
+    // Batterie de la ZOE 4.0 (2018)
     const battery = 43;
 
     // on calcule la puissance délivrée par minute * temps passé en charge
     const puissance_delivrée = (((power * 1000)/60) * minutes) / 1000;
 
-    // on perd 20 % environ
+    // on perd 20 % environ de la puissance de la puissance délivrée par la prise... 
     const puissance_accumulée = puissance_delivrée - ((puissance_delivrée * 20) / 100);
 
-    return ((puissance_accumulée / battery) * 100);
+    const charge = Math.round((puissance_accumulée / battery) * 100);
 
+    if (charge <= 100)
+        return (charge)
+    else
+        return null;
 }
 
 // dispatch reducers

@@ -31,7 +31,7 @@ function mapDispatchToProps(dispatch) {
     }
 }
 
-const App = ({ params, onSpeedUP, onSpeedDOWN, onTempUP, onTempDOWN, onHeaterSWITCH }) => {
+const Autonomie = ({ params, onSpeedUP, onSpeedDOWN, onTempUP, onTempDOWN, onHeaterSWITCH }) => {
 
     const { speed, temp, heater } = params;
 
@@ -73,4 +73,4 @@ const App = ({ params, onSpeedUP, onSpeedDOWN, onTempUP, onTempDOWN, onHeaterSWI
         </div>
     )}
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(Autonomie);

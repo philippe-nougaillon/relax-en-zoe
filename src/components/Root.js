@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Provider } from 'react-redux';
 import { BrowserRouter as HashRouter, Route, NavLink } from 'react-router-dom';
 
-import App from './App'
+import Autonomie from './Autonomie';
 import Charge from './Charge';
 import Bornes from './Bornes';
 
@@ -34,8 +34,7 @@ const Root = ({ store }) => (
         </nav>
 
         <div className="content">
-          {/* <Route exact path="/" component={ App } /> */}
-          <Route exact path={`/`} render={ (routerProps) => <App routerProps={routerProps} />} />
+          <Route exact path={`/`} render={ (routerProps) => <Autonomie routerProps={routerProps} />} />
           <Route path="/charge" component={ Charge } />
           <Route path="/bornes" component={ Bornes } />
         </div>

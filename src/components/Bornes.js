@@ -1,11 +1,16 @@
 import React, { Component } from 'react';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlug, faChargingStation, faEuroSign } from '@fortawesome/free-solid-svg-icons';
+
+
 //const PATH_BASE     = 'http://localhost:3000';
-const PATH_BASE     = 'https://bornes.philnoug.com';
-const PATH_SEARCH   = '/bornes.json';
-const PARAM_KEY1    = 'kms=';
-const PARAM_KEY2    = 'puissance=';
-const PARAM_KEY3    = 'location=';
+const PATH_BASE   = 'https://bornes.philnoug.com';
+const PATH_SEARCH = '/bornes.json';
+const PARAM_KEY1  = 'kms=';
+const PARAM_KEY2  = 'puissance=';
+const PARAM_KEY3  = 'location=';
+const PARAM_KEY4  = 'stations=1';
 
 class Bornes extends Component {
   
@@ -13,8 +18,7 @@ class Bornes extends Component {
     super(props);
 
     this.state = {
-      kms: 100,
-      //puissance: 1,
+      kms: 25,
       limit: 50,
       result: [],
       loading: false,
@@ -31,8 +35,6 @@ class Bornes extends Component {
   }
 
   setBornesResult(result) {
-    //console.log("Result size: " + result.length);
-  
     if (result.length) {
         this.setState({ result });
     } else {
@@ -46,11 +48,10 @@ class Bornes extends Component {
 
   fetchBornesData(_autonomie, _puissance, _location) {
 
-    //console.log("fetchBornesData... Rayon:" + _autonomie + " | Puissance:" + _puissance )
     this.setLoading(true);
 
     // Liste des bornes à proximité
-    fetch(`${PATH_BASE}${PATH_SEARCH}?${PARAM_KEY1}${_autonomie}&${PARAM_KEY2}${_puissance}&${PARAM_KEY3}${_location}`)
+    fetch(`${PATH_BASE}${PATH_SEARCH}?${PARAM_KEY1}${_autonomie}&${PARAM_KEY2}${_puissance}&${PARAM_KEY3}${_location}&${PARAM_KEY4}`)
       .then(response => response.json())
       .then(result => this.setBornesResult(result))
       .then(ret => this.setLoading(false))
@@ -69,7 +70,6 @@ class Bornes extends Component {
         // Lire la liste des bornes limitée à la puissance  
         this.fetchBornesData(this.state.kms, this.state.puissance, value);
     }
-    // console.log("onLocationChange");
   }
 
   componentDidMount() {
@@ -102,8 +102,7 @@ class Bornes extends Component {
     const isSearched = searchTerm => item =>
               item.ad_station.toLowerCase().includes(searchTerm.toLowerCase()); 
 
-    const bornes = result.filter(isSearched(searchTerm)).slice(0, limit);
-    //const bornes = result.filter(isSearched(searchTerm));
+    const bornes = result.filter(isSearched(searchTerm));
 
     return (
         <div className="container">
@@ -128,19 +127,12 @@ class Bornes extends Component {
 
                     { !loading &&
                         <div className="colored_div">
-                            { bornes.length } prises dans un rayon de { kms | 0 } km
+                            { bornes.length } bornes trouvées dans un rayon de { kms | 0 } km
                         </div>
                     }
                 </div>
+
                 <div className="card-body">
-
-                    {/* <Slider 
-                    id="puissance" 
-                    label="Puissance minimum" unit=" kWh" min="1" max="50"
-                    value={ puissance }
-                    onChange={ this.handleOnPuissanceChange }
-                    />   */}
-
                     <form>
                         Filtre: <input
                             type="text"
@@ -160,7 +152,9 @@ class Bornes extends Component {
                                 list ={ bornes }
                                 limit={ limit }
                             />
-                            Liste limitée aux { limit } prises les plus proches...
+                            <a href='https://www.data.gouv.fr/fr/datasets/fichier-consolide-des-bornes-de-recharge-pour-vehicules-electriques/#' target="_blank" rel="noopener noreferrer">
+                              Liste basée sur le jeu de données consolidé IRVE
+                            </a>
                         </span>
                     }
                 </div>
@@ -170,35 +164,15 @@ class Bornes extends Component {
   }
 }
 
-// class Slider extends Component {
-//     render() {
-//       const { id, label, unit, min, max, value, onChange } = this.props;
-//       return (
-//         <div>
-//           <span>{ label }: { value }{ unit }</span>
-//           <input
-//             id   = { id } 
-//             min  = { min } 
-//             max  = { max } 
-//             value= { value } 
-//             onChange= { onChange }
-//             type = "range" 
-//             step = "10"
-//           />
-//         </div>
-//       );
-//     }
-// }
-
-
 const ListeBornes = ({ list }) =>
   <table className="table table-striped table-condensed table-bordered">
     <thead>
       <tr>
         <th>Adresse</th>
-        <th>Km/Puiss./Prise</th>
+        <th>Puissance/Prix</th>
       </tr>
     </thead>
+    
     <tbody>
       {list.map(item => 
         <tr key={ item.id }>
@@ -210,10 +184,15 @@ const ListeBornes = ({ list }) =>
             ~{ item.distance | 0 } km
           </td>
           <td>
+              <FontAwesomeIcon icon={ faChargingStation } style={{ marginRight: 10 }} />
               { parseInt(item.puiss_max) | 0 } kWh
               <br />  
+
+              <FontAwesomeIcon icon={ faPlug } style={{ marginRight: 10 }} />
               { item.type_prise }
               <br /> 
+
+              <FontAwesomeIcon icon={ faEuroSign } style={{ marginRight: 10 }} />
               { item.acces_recharge }
           </td>
         </tr>
