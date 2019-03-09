@@ -24,8 +24,7 @@ function mapDispatchToProps(dispatch) {
     }
 }
 
-const coutCharge = (puissance, durée) => ((puissance * (durée / 60)) * 0.15).toFixed(1);
-
+const coutCharge = (puissance, durée) => new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR' }).format(((puissance * (durée / 60)) * 0.15).toFixed(2));
 
 const Charge = ({ params, onPowerUP, onPowerDOWN, onTimeUP, onTimeDOWN }) => {
 
@@ -41,10 +40,10 @@ const Charge = ({ params, onPowerUP, onPowerDOWN, onTimeUP, onTimeDOWN }) => {
                         <br />
                          + { charge }% 
                         <small><small style={{ marginLeft: 15 }}>
-                            (~{ (300 * charge) / 100 | 0.0 } km)
+                            (~{ (300 * charge) / 100 | 0 } km)
                         </small></small>
                     </h1>
-                   Coût de la charge: { coutCharge(power, minutes) }€ *
+                   Coût de la charge: { coutCharge(power, minutes) } *
                 </div>
 
                 <div className="card-body">
