@@ -24,6 +24,9 @@ function mapDispatchToProps(dispatch) {
     }
 }
 
+const coutCharge = (puissance, durée) => ((puissance * (durée / 60)) * 0.15).toFixed(1);
+
+
 const Charge = ({ params, onPowerUP, onPowerDOWN, onTimeUP, onTimeDOWN }) => {
 
     const { power, minutes, charge } = params;
@@ -38,9 +41,10 @@ const Charge = ({ params, onPowerUP, onPowerDOWN, onTimeUP, onTimeDOWN }) => {
                         <br />
                          + { charge }% 
                         <small><small style={{ marginLeft: 15 }}>
-                            (~{ (300 * charge) / 100 | 0 } km)
+                            (~{ (300 * charge) / 100 | 0.0 } km)
                         </small></small>
                     </h1>
+                   Coût de la charge: { coutCharge(power, minutes) }€ *
                 </div>
 
                 <div className="card-body">
@@ -71,7 +75,7 @@ const Charge = ({ params, onPowerUP, onPowerDOWN, onTimeUP, onTimeDOWN }) => {
                         <li>7 kW/h => 10h</li>
                         <li>3 kW/h => 25h</li>
                     </ul>
-                    Notez qu'au delà de 80%, la charge est 2 fois plus longue !
+                    <small><i>* Tarif EDF HP (0.15 €/kWh)</i></small>
                 </div>
             </div>
         </div>
