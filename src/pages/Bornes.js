@@ -4,13 +4,15 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlug, faChargingStation, faEuroSign } from '@fortawesome/free-solid-svg-icons';
 
 
-const PATH_BASE     = 'http://localhost:3000';
-//const PATH_BASE   = 'https://bornes.philnoug.com';
-const PATH_SEARCH = '/bornes.json';
-const PARAM_KEY1  = 'kms=';
-//const PARAM_KEY2  = 'puissance=';
-const PARAM_KEY3  = 'location=';
-const PARAM_KEY4  = 'stations=1';
+const PATH_BASE   = 'https://bornes.philnoug.com';
+//const PATH_BASE     = 'http://localhost:3000';
+
+const PATH_SEARCH = '/api/v1/bornes.json';
+
+const PARAM_KEY1  = 'location=';
+const PARAM_KEY2  = 'kms=';
+const PARAM_KEY3  = 'stations=1';
+
 
 class Bornes extends Component {
   
@@ -51,7 +53,7 @@ class Bornes extends Component {
     this.setLoading(true);
 
     // Liste des bornes à proximité
-    fetch(`${PATH_BASE}${PATH_SEARCH}?${PARAM_KEY1}${_autonomie}&${PARAM_KEY3}${_location}&${PARAM_KEY4}`)
+    fetch(`${PATH_BASE}${PATH_SEARCH}?${PARAM_KEY1}${_location}&${PARAM_KEY2}${_autonomie}&${PARAM_KEY3}`)
       .then(response => response.json())
       .then(result => this.setBornesResult(result))
       .then(ret => this.setLoading(false))
