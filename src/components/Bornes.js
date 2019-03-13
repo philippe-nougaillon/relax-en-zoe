@@ -153,7 +153,7 @@ class Bornes extends Component {
                                 limit={ limit }
                             />
                             <a href='https://www.data.gouv.fr/fr/datasets/fichier-consolide-des-bornes-de-recharge-pour-vehicules-electriques/#' target="_blank" rel="noopener noreferrer">
-                              Liste basée sur le jeu de données consolidé IRVE
+                              Liste basée sur le jeu de données IRVE
                             </a>
                         </span>
                     }
