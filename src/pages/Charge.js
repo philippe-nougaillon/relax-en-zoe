@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import { faChargingStation, faHourglassStart } from '@fortawesome/free-solid-svg-icons';
-import CustomButtonBox from './CustomButtonBox'; 
+import CustomButtonBox from '../components/CustomButtonBox'; 
 
 import { doPowerUP } from '../actions/powerUp';
 import { doPowerDOWN } from '../actions/powerDown';

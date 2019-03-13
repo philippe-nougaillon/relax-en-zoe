@@ -9,10 +9,10 @@ import { doHeaterSWITCH } from '../actions/heaterSwitch';
 
 import { faTachometerAlt, faTemperatureHigh } from '@fortawesome/free-solid-svg-icons';
 
-import CustomButtonBox from './CustomButtonBox'; 
-import CustomSwitchBox from './CustomSwitchBox'; 
-import Header from './Header';
-import Footer from './Footer';
+import CustomButtonBox from '../components/CustomButtonBox'; 
+import CustomSwitchBox from '../components/CustomSwitchBox'; 
+import Header from './AutonomieHeader';
+import Footer from './AutonomieFooter';
 
 
 function mapStateToProps(state) {

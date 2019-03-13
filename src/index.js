@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
 
-import Root from './components/Root';
+import Root from './pages/Root';
 
 import store from './store';
 
