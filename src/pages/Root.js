@@ -34,7 +34,7 @@ const Root = ({ store }) => (
         </nav>
 
         <div className="content">
-          <Route exact path={`/`} render={ (routerProps) => <Autonomie routerProps={routerProps} />} />
+          <Route exact path="/" component={ Autonomie } />
           <Route path="/charge" component={ Charge } />
           <Route path="/bornes" component={ Bornes } />
         </div>
