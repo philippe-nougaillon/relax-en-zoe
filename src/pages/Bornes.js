@@ -160,13 +160,15 @@ const ListeBornes = ({ list }) =>
       {list.map(item => 
         <tr key={ item.id }>
           <td>
-              <a href={ `${PATH_BASE}/bornes/${ item.id }` } target="_blank" rel="noopener noreferrer">
+              <a href={ `${PATH_BASE}/bornes/${ item.id }` } rel="noopener noreferrer">
                 { item.n_station }
               </a>
               <br />
-              { item.ad_station }
-              <br />
-              ~ { item.distance | 0 } km
+              <small>
+                { item.ad_station }
+                <br />
+                ~ { item.distance | 0 } km
+              </small>
           </td>
           <td>
               <FontAwesomeIcon icon={ faChargingStation } style={{ marginRight: 10 }} />
