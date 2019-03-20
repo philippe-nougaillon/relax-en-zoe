@@ -78,17 +78,6 @@ class Bornes extends Component {
     this.fetchBornesData(this.state.currentLocation, this.state.kms);
   }
 
-  handleOnChange(event) {
-    const key = String(event.target.id);
-    const value = event.target.value;
-
-    // Conserve la valeur du slider (charge/speed/temp)
-    this[key] = value;
-
-    // Rafraichir l'affichage
-    this.setState({ [key]: value });
-  }
-
   render() {
     const { result, loading, searchTerm, error, currentLocation, limit, kms } = this.state;
 
@@ -99,66 +88,67 @@ class Bornes extends Component {
 
     return (
         <div className="container">
-            <br />
-            <div className="card">
-                <div className="card-header">
-                    <h1>
-                        <small className="text-info">Bornes</small>
-                        <form>
-                        Autour de <input
-                                type="text"
-                                onChange={ this.onLocationChange }
-                                value={ currentLocation }
-                                size="6"
-                            />  
-                        </form> 
-                    </h1>
-
-                    { error && 
-                        <h3>Pas de réseau :/</h3>  
-                    }
-
-                    { !loading &&
-                        <div className="colored_div">
-                            { bornes.length } bornes trouvées dans un rayon de { kms | 0 } km
-                        </div>
-                    }
-                </div>
-
-                <div className="card-body">
+          <br />
+          <div className="card">
+            <div className="card-header">
+                <h1>
+                    <small className="text-info">Bornes</small>
                     <form>
-                        Filtre: <input
+                    Autour de <input
                             type="text"
-                            onChange={ this.onFilterChange }
-                            value={ searchTerm }
+                            onChange={ this.onLocationChange }
+                            value={ currentLocation }
+                            size="6"
                         />  
                     </form> 
+                </h1>
 
-                    { (loading && !error) &&
-                        <div className="colored_div">Chargement...</div>
-                    }  
+                { error && 
+                    <h3>Pas de réseau :/</h3>  
+                }
 
-                    { (bornes.length > 0 && !loading) &&
-                        <span>
-                            <br />  
-                            <ListeBornes 
-                                list ={ bornes }
-                                limit={ limit }
-                            />
-                        </span>
-                    }
-                </div>
-                <div className="card-footer">
-
-                </div>
+                { !loading &&
+                    <div className="colored_div">
+                        { bornes.length } bornes dans un rayon de { kms | 0 } km
+                    </div>
+                }
             </div>
+
+            <div className="card-body">
+                <form>
+                    Filtrer: <input
+                        type="text"
+                        onChange={ this.onFilterChange }
+                        value={ searchTerm }
+                    />  
+                </form> 
+
+                { (loading && !error) &&
+                    <div className="colored_div">Chargement...</div>
+                }  
+
+                { (bornes.length > 0 && !loading) &&
+                    <span>
+                        <br />
+                        <ListeBornes 
+                            list ={ bornes }
+                            limit={ limit }
+                        />
+                    </span>
+                }
+            </div>
+
+            <div className="card-footer">
+            </div>
+
+          </div>
       </div>
     );
   }
 }
 
 const ListeBornes = ({ list }) =>
-  <table className="table table-striped table-condensed table-bordered">
+  <table className="table table-condensed">
     <thead>
       <tr>
         <th>Adresse</th>
