@@ -38,8 +38,8 @@ const About = () => {
                         sur <a href='https://github.com/philippe-nougaillon/AutonomieZoe_ReactRedux' target="_blank" rel="noopener noreferrer">
                             GitHub
                         </a>
+                        Epinglez l'app sur votre "Homescreen" afin de pouvoir y accéder plus facilement
                     </pre>
-
                 </div>
 
                 <div className="card-footer">
