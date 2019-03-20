@@ -5,13 +5,12 @@ import { faPlug, faChargingStation, faEuroSign } from '@fortawesome/free-solid-s
 
 
 const PATH_BASE   = 'https://bornes.philnoug.com';
-//const PATH_BASE     = 'http://localhost:3000';
+//const PATH_BASE     = 'http://localhost:3030';
 
 const PATH_SEARCH = '/api/v1/bornes.json';
 
 const PARAM_KEY1  = 'location=';
 const PARAM_KEY2  = 'kms=';
-const PARAM_KEY3  = 'stations=1';
 
 
 class Bornes extends Component {
@@ -20,7 +19,7 @@ class Bornes extends Component {
     super(props);
 
     this.state = {
-      kms: 25,
+      kms: 30,
       limit: 50,
       result: [],
       loading: false,
@@ -32,7 +31,7 @@ class Bornes extends Component {
     this.setBornesResult = this.setBornesResult.bind(this);
     this.setLoading = this.setLoading.bind(this);
     this.fetchBornesData = this.fetchBornesData.bind(this);
-    this.onSearchChange = this.onSearchChange.bind(this);
+    this.onFilterChange = this.onFilterChange.bind(this);
     this.onLocationChange = this.onLocationChange.bind(this);
   }
 
@@ -48,20 +47,16 @@ class Bornes extends Component {
     this.setState({ loading: isLoading })
   }
 
-  fetchBornesData(_autonomie, _puissance, _location) {
+  fetchBornesData(_location, _autonomie) {
 
     this.setLoading(true);
 
     // Liste des bornes à proximité
-    fetch(`${PATH_BASE}${PATH_SEARCH}?${PARAM_KEY1}${_location}&${PARAM_KEY2}${_autonomie}&${PARAM_KEY3}`)
+    fetch(`${PATH_BASE}${PATH_SEARCH}?${PARAM_KEY1}${_location}&${PARAM_KEY2}${_autonomie}`)
       .then(response => response.json())
       .then(result => this.setBornesResult(result))
       .then(ret => this.setLoading(false))
       .catch(error => this.setState({ error }));
-  }
-
-  onSearchChange(event) {
-    this.setState({ searchTerm: event.target.value });
   }
 
   onLocationChange(event) {
@@ -70,13 +65,17 @@ class Bornes extends Component {
 
     if (value && !this.state.loading) {
         // Lire la liste des bornes limitée à la puissance  
-        this.fetchBornesData(this.state.kms, this.state.puissance, value);
+        this.fetchBornesData(value, this.state.kms);
     }
+  }
+
+  onFilterChange(event) {
+    this.setState({ searchTerm: event.target.value });
   }
 
   componentDidMount() {
     // Afficher la liste au chargement de la page 
-    this.fetchBornesData(this.state.kms, this.state.puissance, this.state.currentLocation);
+    this.fetchBornesData(this.state.currentLocation, this.state.kms);
   }
 
   handleOnChange(event) {
@@ -88,14 +87,6 @@ class Bornes extends Component {
 
     // Rafraichir l'affichage
     this.setState({ [key]: value });
-  }
-
-  handleOnPuissanceChange(event) {
-    const value = event.target.value;
-    this.setState({ puissance: value });
-
-    // Lire la liste des bornes limitée à la puissance  
-    this.fetchBornesData(this.state.kms, value, this.state.currentLocation);
   }
 
   render() {
@@ -114,7 +105,7 @@ class Bornes extends Component {
                     <h1>
                         <small className="text-info">Bornes</small>
                         <form>
-                            Autour de <input
+                        Autour de <input
                                 type="text"
                                 onChange={ this.onLocationChange }
                                 value={ currentLocation }
@@ -138,7 +129,7 @@ class Bornes extends Component {
                     <form>
                         Filtre: <input
                             type="text"
-                            onChange={ this.onSearchChange }
+                            onChange={ this.onFilterChange }
                             value={ searchTerm }
                         />  
                     </form> 
@@ -154,11 +145,11 @@ class Bornes extends Component {
                                 list ={ bornes }
                                 limit={ limit }
                             />
-                            <a href='https://www.data.gouv.fr/fr/datasets/fichier-consolide-des-bornes-de-recharge-pour-vehicules-electriques/#' target="_blank" rel="noopener noreferrer">
-                              Liste basée sur le jeu de données IRVE
-                            </a>
                         </span>
                     }
+                </div>
+                <div className="card-footer">
+
                 </div>
             </div>
       </div>
@@ -179,11 +170,13 @@ const ListeBornes = ({ list }) =>
       {list.map(item => 
         <tr key={ item.id }>
           <td>
-            <a href={ `${PATH_BASE}/bornes/${ item.id }` } target="_blank" rel="noopener noreferrer">
+              <a href={ `${PATH_BASE}/bornes/${ item.id }` } target="_blank" rel="noopener noreferrer">
+                { item.n_station }
+              </a>
+              <br />
               { item.ad_station }
-            </a>
-            <br />
-            ~{ item.distance | 0 } km
+              <br />
+              ~ { item.distance | 0 } km
           </td>
           <td>
               <FontAwesomeIcon icon={ faChargingStation } style={{ marginRight: 10 }} />

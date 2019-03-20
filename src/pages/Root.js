@@ -1,15 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Provider } from 'react-redux';
-import { BrowserRouter as HashRouter, Route, NavLink } from 'react-router-dom';
+import { BrowserRouter as Router, Route, NavLink } from 'react-router-dom';
 
 import Autonomie from './Autonomie';
 import Charge from './Charge';
 import Bornes from './Bornes';
+import About from './About';
 
 const Root = ({ store }) => (
   <Provider store={store}>
-    <HashRouter>
+    <Router>
       <div>
         <nav className="navbar navbar-expand-sm bg-dark navbar-dark">
           <a className="navbar-brand" href="/">Renault ZOE 4.0</a>
@@ -29,6 +30,9 @@ const Root = ({ store }) => (
               <li className="nav-item">
                 <NavLink className="nav-link" activeClassName="active" to="/bornes">Bornes</NavLink>
               </li>
+              <li className="nav-item">
+                <NavLink className="nav-link" activeClassName="active" to="/about">A propos</NavLink>
+              </li>
             </ul>
           </div>
         </nav>
@@ -37,9 +41,10 @@ const Root = ({ store }) => (
           <Route exact path="/" component={ Autonomie } />
           <Route path="/charge" component={ Charge } />
           <Route path="/bornes" component={ Bornes } />
+          <Route path="/about" component={ About } />
         </div>
       </div>
-    </HashRouter>
+    </Router>
   </Provider>
 )
 

@@ -11,7 +11,7 @@ function Header ({ params }) {
     return (
         <div className="card-header">
             <h1>
-                <small className="text-info">Autonomie*</small>
+                <small className="text-info">Autonomie</small>
                 <br />
                 { params.autonomie | 0 }
                 <small> km</small>
