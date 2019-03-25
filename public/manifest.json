@@ -1,6 +1,6 @@
 {
-  "short_name": "ZOE",
-  "name": "Autonomie Renault ZOE 4.0",
+  "short_name": "Relaxateur ZOE",
+  "name": "Relaxateur Renault ZOE 4.0",
   "icons": [
     {
       "src": "favicon.ico",
@@ -8,7 +8,7 @@
       "type": "image/x-icon"
     },
     {
-      "src": "favicon.ico",
+      "src": "logo-react.png",
       "sizes": "144x144",
       "type": "image/x-icon"
     }

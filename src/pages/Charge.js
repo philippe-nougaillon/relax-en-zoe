@@ -67,13 +67,16 @@ const Charge = ({ params, onPowerUP, onPowerDOWN, onTimeUP, onTimeDOWN }) => {
                 </div>
 
                 <div className="card-footer">
-                    Temps de charge (0 à 100%): 
-                    <ul>
-                        <li>22 kW/h => 2h40</li>
-                        <li>11 kW/h => 5h</li>
-                        <li>7 kW/h => 10h</li>
-                        <li>3 kW/h => 25h</li>
-                    </ul>
+                    <small>
+                        Temps de charge (0 à 100%) : 
+                        <ul>
+                            <li>22 kW/h = ~2h40</li>
+                            <li>11 kW/h = ~5h</li>
+                            <li>7 kW/h  = ~10h</li>
+                            <li>3 kW/h  = ~25h</li>
+                        </ul>
+                        <i>Au delà des 80%, le temps de charge est doublé</i>
+                    </small>
                 </div>
             </div>
         </div>

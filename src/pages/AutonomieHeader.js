@@ -13,7 +13,7 @@ function Header ({ params }) {
             <h1>
                 <small className="text-info">Autonomie</small>
                 <br />
-                { params.autonomie | 0 }
+                ~{ params.autonomie | 0 }
                 <small> km</small>
             </h1>
         </div>

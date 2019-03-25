@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faInfoCircle, faLightbulb, faCodeBranch } from '@fortawesome/free-solid-svg-icons';
+import { faInfoCircle, faEuroSign, faMobile, faCodeBranch, faChargingStation } from '@fortawesome/free-solid-svg-icons';
 
 const About = () => {
 
@@ -18,43 +18,48 @@ const About = () => {
                 </div>
 
                 <div className="card-body">
-                    <h4>
-                        Estimer l'autonomie, le temps de charge et trouver une borne à proximité, 
-                        c'est ce qu'essaye de faire cet outil, développé pour un usage personnel 
-                        par un utilisateur de la Renault ZOE 4.0
-                    </h4>
+                    <h5>
+                    Ce "relaxateur" permet de faire baisser la pression et l'angoisse de la panne que ressentent souvent les conducteurs de véhicules électriques, en estimant l'autonomie et le temps de recharge, ainsi que le nombre de bornes à proximité d'un lieu d'arrivée. 
+                    <br /><br />
+                    Le relaxateur ZOE permet de vivre plus sereinement l'aventure de la conduite électrique ;-)                    
+                    </h5>    
                     <br />
 
-                    <FontAwesomeIcon icon={ faInfoCircle } style={{ marginRight: 10 }} />
+                    <FontAwesomeIcon icon={ faInfoCircle } style={{ marginRight: 10 }} /> Avertissement 
+                    : L'estimation de l'autonomie est approximative. Elle est calculée à partir de données trouvées sur le net.<br />
 
-                    L'estimation de l'autonomie est approximative. Elle est calculée à partir de données trouvées sur le net.<br />
-
+                    <FontAwesomeIcon icon={ faEuroSign } style={{ marginRight: 10 }} />
                     Le tarif EDF utilisé pour estimer le coût d'une charge est de 0.15 €/kWh en heures pleines.<br />
 
+                    <FontAwesomeIcon icon={ faChargingStation } style={{ marginRight: 10 }} />
                     La liste des bornes est basée sur le fichier consolidé 
                     des bornes de recharge <a href='https://www.data.gouv.fr/fr/datasets/fichier-consolide-des-bornes-de-recharge-pour-vehicules-electriques/#' target="_blank" rel="noopener noreferrer">
                         IRVE (mars 2019)
                     </a>.
                     <br /><br />
 
-                    <FontAwesomeIcon icon={ faCodeBranch } style={{ marginRight: 10 }} />
-                    Le code source de l'application est disponible 
-                    sur <a href='https://github.com/philippe-nougaillon/AutonomieZoe_ReactRedux' target="_blank" rel="noopener noreferrer">
-                        GitHub
-                    </a>
-                    <br /><br />
-
-                    <FontAwesomeIcon icon={ faLightbulb } style={{ marginRight: 10 }} />
-                    Epinglez l'app sur votre "Homescreen" afin de pouvoir y accéder plus facilement
+                    <FontAwesomeIcon icon={ faMobile } style={{ marginRight: 10 }} />
+                    Epinglez l'App sur votre "Homescreen" afin de pouvoir y accéder plus facilement
+                    <br />
                 </div>
 
                 <div className="card-footer">
                     <pre>
-                        <i>Application non-officielle</i>
+                        <i>Application non-officielle, <br />
+                            développé pour un usage personnel<br /> 
+                            par un utilisateur de ZOE 4.0
+                        </i>
                     </pre>
+
+                    <FontAwesomeIcon icon={ faCodeBranch } style={{ marginRight: 10 }} />
+                    Code source disponible 
+                    sur <a href='https://github.com/philippe-nougaillon/AutonomieZoe_ReactRedux' target="_blank" rel="noopener noreferrer">
+                        GitHub
+                    </a>
                 </div>
 
             </div>
+            <br />
         </div>
     )}
 
