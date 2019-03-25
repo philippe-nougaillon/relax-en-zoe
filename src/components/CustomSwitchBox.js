@@ -28,7 +28,7 @@ class CustomSwitchBox extends Component {
                         />
 
                         <label className="custom-control-label" htmlFor="switch1">
-                            { value ? "on" : "off" }
+                            { value ? "allumé" : "éteint" }
                         </label>
                     </span>
                 </div>
