@@ -12,7 +12,6 @@ import { faTachometerAlt, faTemperatureHigh } from '@fortawesome/free-solid-svg-
 import CustomButtonBox from '../components/CustomButtonBox'; 
 import CustomSwitchBox from '../components/CustomSwitchBox'; 
 import Header from './AutonomieHeader';
-import Footer from './AutonomieFooter';
 
 
 function mapStateToProps(state) {
@@ -68,7 +67,9 @@ const Autonomie = ({ params, onSpeedUP, onSpeedDOWN, onTempUP, onTempDOWN, onHea
                         onChange={ onHeaterSWITCH } >
                     </CustomSwitchBox>
                 </div>
-                <Footer />
+                <div className="card-footer">
+                    <small>Consommation électrique estimée: ~{ params.consommation | 0 } kWh </small>
+                </div>
             </div>
         </div>
     )}

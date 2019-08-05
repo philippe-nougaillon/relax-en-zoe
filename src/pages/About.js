@@ -45,10 +45,10 @@ const About = () => {
                     Le tarif EDF utilisé pour estimer le coût d'une charge est de 0.15 €/kWh en heures pleines.<br />
 
                     <FontAwesomeIcon icon={ faChargingStation } style={{ marginRight: 10 }} />
-                    La liste des bornes est basée sur le fichier consolidé 
-                    des bornes de recharge <a href='https://www.data.gouv.fr/fr/datasets/fichier-consolide-des-bornes-de-recharge-pour-vehicules-electriques/#' target="_blank" rel="noopener noreferrer">
-                        IRVE (Août 2019)
-                    </a>.
+                    La liste des bornes est basée sur 
+                    le <a href='https://www.data.gouv.fr/fr/datasets/fichier-consolide-des-bornes-de-recharge-pour-vehicules-electriques/#' target="_blank" rel="noopener noreferrer">
+                        fichier consolidé des bornes de rechargeIRVE (Août 2019)
+                    </a> fourni par data.gouv.fr. Les bornes sont consultables sur ce site <a href="http://bornes.philnoug.com">bornes.philnoug.com</a> 
                     <br /><br />
 
                     <FontAwesomeIcon icon={ faCodeBranch } style={{ marginRight: 10 }} />

@@ -138,13 +138,14 @@ function calculate(charge, speed, temp, heater) {
 
     let results = {'autonomie': 0, 'consommation': 0};
     let autonomie = 0;
+    let conso = 0
 
     // Puissance restante
     const puissance = 41; // Batterie ZOE 4.0 (41kW)
     const battery   = puissance - (puissance * (100 - charge) / 100);
 
     // Consommation 
-    const conso = consommations[speed];
+    conso = consommations[speed];
     autonomie = battery * (speed / conso);
 
     // Impact de la température extérieure
@@ -154,9 +155,10 @@ function calculate(charge, speed, temp, heater) {
     // Impact du chauffage
     if (heater && temp <= 10) {
         const heatercost = heatercosts[temp];
-        autonomie = autonomie - (autonomie * heatercost / 100); 
+        autonomie = autonomie - (autonomie * heatercost / 100);
+        conso = conso + (conso * heatercost / 100); 
     }
-    
+
     results['autonomie']= autonomie;
     results['consommation']= conso;
 
