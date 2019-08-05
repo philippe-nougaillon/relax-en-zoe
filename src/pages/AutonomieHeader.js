@@ -16,6 +16,7 @@ function Header ({ params }) {
                 ~{ params.autonomie | 0 }
                 <small> km</small>
             </h1>
+            ~ <small>{ params.consommation } kWh</small>
         </div>
     ); 
 }

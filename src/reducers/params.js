@@ -10,6 +10,7 @@ const params = {
     power: 22,
     minutes: 60,
     charge: 40,
+    consommation: 11.12,
 };
 
 // reducers
@@ -17,20 +18,24 @@ const params = {
 
 function applySpeedUP(state, action) {
     const speed = state.speed + 10;
-    const autonomie = calculate(100, speed, state.temp, state.heater);
+    const results = calculate(100, speed, state.temp, state.heater);
+    const autonomie = results['autonomie']
+    const consommation = results['consommation']
 
     if (autonomie)
-        return {...state, speed, autonomie};
+        return {...state, speed, autonomie, consommation};
     else
         return state;
 }
 
 function applySpeedDOWN(state, action) {
     const speed = state.speed - 10;
-    const autonomie = calculate(100, speed, state.temp, state.heater);
+    const results = calculate(100, speed, state.temp, state.heater);
+    const autonomie = results['autonomie']
+    const consommation = results['consommation']
 
     if (autonomie)
-        return {...state, speed, autonomie};
+        return {...state, speed, autonomie, consommation};
     else
         return state;
 }
@@ -39,13 +44,15 @@ function applyTempUP(state, action) {
     const temp = state.temp + 10;
     let heater = state.heater;
 
-    const autonomie = calculate(100, state.speed, temp, heater);
+    const results = calculate(100, state.speed, temp, heater);
+    const autonomie = results['autonomie']
+    const consommation = results['consommation']
 
     // Allumer le chauffage ?     
     heater = (temp <= 10);
 
     if (autonomie)
-        return {...state, temp, autonomie, heater};
+        return {...state, temp, autonomie, heater, consommation};
     else
         return state;
 }
@@ -54,12 +61,14 @@ function applyTempDOWN(state, action) {
     const temp = state.temp - 10;
     let heater = state.heater;
 
-    const autonomie = calculate(100, state.speed, temp, heater);
+    const results = calculate(100, state.speed, temp, heater);
+    const autonomie = results['autonomie']
+    const consommation = results['consommation']
 
     heater = (temp <= 10);
 
     if (autonomie)
-        return {...state, temp, autonomie, heater};
+        return {...state, temp, autonomie, heater, consommation};
     else
         return state;
 }
@@ -127,7 +136,8 @@ function calculate(charge, speed, temp, heater) {
     const températures  = { '40': -5, '30': -2.5, '20': 0, '10': 2.5, '0': 10, '-10': 20};
     const heatercosts   = { '10': 3, '0': 5, '-10': 10 };
 
-    let autonomie = 0
+    let results = {'autonomie': 0, 'consommation': 0};
+    let autonomie = 0;
 
     // Puissance restante
     const puissance = 41; // Batterie ZOE 4.0 (41kW)
@@ -146,8 +156,11 @@ function calculate(charge, speed, temp, heater) {
         const heatercost = heatercosts[temp];
         autonomie = autonomie - (autonomie * heatercost / 100); 
     }
+    
+    results['autonomie']= autonomie;
+    results['consommation']= conso;
 
-    return autonomie;
+    return results;
 }
 
 function calculate_charge(power, minutes) {
