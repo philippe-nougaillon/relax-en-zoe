@@ -19,14 +19,14 @@ const About = () => {
 
                 <div className="card-body">
                     <h5>
-                        Vivez plus sereinement l'aventure de la conduite électrique                    
+                        Vivez plus sereinement l'aventure de la conduite électrique !                  
                         <br /><br />
-                        Ce "relaxateur" ZOE permet de faire baisser la pression et l'angoisse de la panne que ressentent souvent les conducteurs de véhicules électriques, en estimant l'autonomie et le temps de recharge, ainsi que le nombre de bornes à proximité d'un lieu d'arrivée. 
+                        Ce "relaxateur" tente de faire baisser la pression et l'angoisse de la panne, en estimant l'autonomie et le temps de recharge ainsi que les bornes à proximité d'un lieu d'arrivée. 
                     </h5>    
                     <br />
 
                     <FontAwesomeIcon icon={ faMobile } style={{ marginRight: 10 }} />
-                    Epinglez l'App sur votre "Homescreen" afin de pouvoir y accéder plus facilement
+                    Sur mobile: Epinglez l'App sur votre "Homescreen" afin de pouvoir y accéder plus facilement
                     <br />
                 </div>
 
@@ -48,12 +48,12 @@ const About = () => {
                     La liste des bornes est basée sur 
                     le <a href='https://www.data.gouv.fr/fr/datasets/fichier-consolide-des-bornes-de-recharge-pour-vehicules-electriques/#' target="_blank" rel="noopener noreferrer">
                         fichier consolidé des bornes de recharge IRVE (Août 2019)
-                    </a> fourni par data.gouv.fr. Ces données importées régulièrement sont consultables sur mon site <a href="https://bornes-irve.philnoug.com">bornes-irve.philnoug.com</a> 
+                    </a> fourni par data.gouv.fr. Ces données sont importées régulièrement. Elles sont consultables sur mon site <a href="https://bornes-irve.philnoug.com">bornes-irve.philnoug.com</a> 
                     <br /><br />
 
                     <FontAwesomeIcon icon={ faCodeBranch } style={{ marginRight: 10 }} />
                     Code source disponible 
-                    sur <a href='https://github.com/philippe-nougaillon/AutonomieZoe_ReactRedux' target="_blank" rel="noopener noreferrer">
+                    sur <a href="https://github.com/philippe-nougaillon/Relax-en-ZOE" target="_blank" rel="noopener noreferrer">
                         GitHub
                     </a>
                 </div>
