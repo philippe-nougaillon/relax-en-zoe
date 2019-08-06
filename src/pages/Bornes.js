@@ -4,7 +4,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlug, faChargingStation, faEuroSign } from '@fortawesome/free-solid-svg-icons';
 
 
-const PATH_BASE   = 'https://bornes-irve.philnoug.com';
+const PATH_BASE   = 'http://localhost:3030';
+//const PATH_BASE   = 'https://bornes-irve.philnoug.com';
 const PATH_SEARCH = '/api/v1/bornes.json';
 const PARAM_KEY1  = 'location=';
 const PARAM_KEY2  = 'kms=';
@@ -16,13 +17,13 @@ class Bornes extends Component {
     super(props);
 
     this.state = {
-      kms: 30,
-      limit: 50,
+      kms: 20,
+      limit: 10,
       result: [],
       loading: false,
       searchTerm: '',
       error: false,
-      currentLocation: 'Paris',
+      currentLocation: '',
     }
 
     this.setBornesResult = this.setBornesResult.bind(this);
@@ -104,21 +105,23 @@ class Bornes extends Component {
                     <h3>Pas de réseau :/</h3>  
                 }
 
-                { !loading &&
+                { (!loading && bornes.length > 0) &&
                     <div className="colored_div">
-                        { bornes.length } bornes dans un rayon de { kms | 0 } km
+                        Liste limitée à { bornes.length } bornes dans un rayon de { kms | 0 } km
                     </div>
                 }
             </div>
 
             <div className="card-body">
-                <form>
-                    Filtrer: <input
-                        type="text"
-                        onChange={ this.onFilterChange }
-                        value={ searchTerm }
-                    />  
-                </form> 
+                {  false &&
+                  <form>
+                      Filtrer: <input
+                          type="text"
+                          onChange={ this.onFilterChange }
+                          value={ searchTerm }
+                      />  
+                  </form> 
+                }
 
                 { (loading && !error) &&
                     <div className="colored_div">Chargement...</div>
