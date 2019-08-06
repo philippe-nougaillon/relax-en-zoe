@@ -96,7 +96,7 @@ class Bornes extends Component {
                             type="text"
                             onChange={ this.onLocationChange }
                             value={ currentLocation }
-                            size="10"
+                            size="8"
                         />  
                     </form> 
                 </h1>
