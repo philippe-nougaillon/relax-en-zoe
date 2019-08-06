@@ -61,8 +61,8 @@ class Bornes extends Component {
     const value =  event.target.value;
     this.setState({ currentLocation: value });
 
-    if (value && !this.state.loading) {
-        // Lire la liste des bornes limitée à la puissance  
+    if (value && value.length > 3 && !this.state.loading) {
+        // Lire la liste des bornes à proximité de la ville saisie
         this.fetchBornesData(value, this.state.kms);
     }
   }
@@ -96,7 +96,7 @@ class Bornes extends Component {
                             type="text"
                             onChange={ this.onLocationChange }
                             value={ currentLocation }
-                            size="6"
+                            size="10"
                         />  
                     </form> 
                 </h1>
@@ -105,41 +105,28 @@ class Bornes extends Component {
                     <h3>Pas de réseau :/</h3>  
                 }
 
-                { (!loading && bornes.length > 0) &&
-                    <div className="colored_div">
-                        Liste limitée à { bornes.length } bornes dans un rayon de { kms | 0 } km
-                    </div>
-                }
             </div>
 
-            <div className="card-body">
-                {  false &&
-                  <form>
-                      Filtrer: <input
-                          type="text"
-                          onChange={ this.onFilterChange }
-                          value={ searchTerm }
-                      />  
-                  </form> 
-                }
+            { (loading && !error) &&
+                  <div className="colored_div">Chargement...</div>
+            }  
 
-                { (loading && !error) &&
-                    <div className="colored_div">Chargement...</div>
-                }  
-
-                { (bornes.length > 0 && !loading) &&
-                    <span>
-                        <br />
-                        <ListeBornes 
-                            list ={ bornes }
-                            limit={ limit }
-                        />
-                    </span>
-                }
-            </div>
-
-            <div className="card-footer">
-            </div>
+            { (!loading && bornes.length > 0) &&
+                <span>
+                  <div className="card-body">
+                      <ListeBornes 
+                          list ={ bornes }
+                          limit={ limit }
+                      />
+                  </div>
+        
+                  <div className="card-footer">
+                          <div className="colored_div">
+                              Liste limitée à { bornes.length } bornes dans un rayon de { kms | 0 } km
+                          </div>
+                  </div>
+                </span> 
+            }
 
           </div>
       </div>
@@ -148,7 +135,7 @@ class Bornes extends Component {
 }
 
 const ListeBornes = ({ list }) =>
-  <table className="table table-condensed">
+  <table className="table table-condensed table-striped">
     <thead>
       <tr>
         <th>Adresse</th>
@@ -165,8 +152,6 @@ const ListeBornes = ({ list }) =>
               </a>
               <br />
               <small>
-                { item.ad_station }
-                <br />
                 ~ { item.distance | 0 } km
               </small>
           </td>
