@@ -76,9 +76,11 @@ function applyTempDOWN(state, action) {
 function applyHeaterSWITCH(state, action) {
 
     const heater = !state.heater;
-    const autonomie = calculate(100, state.speed, state.temp, heater);
+    const results = calculate(100, state.speed, state.temp, heater);
+    const autonomie = results['autonomie']
+    const consommation = results['consommation']
 
-    return {...state, heater, autonomie};
+    return {...state, heater, autonomie, consommation};
 }
 
 // CHARGE 
