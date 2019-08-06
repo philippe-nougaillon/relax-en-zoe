@@ -34,7 +34,7 @@ const About = () => {
                     <pre>
                         <i>Application non-officielle, <br />
                             développé pour un usage personnel<br /> 
-                            par un utilisateur de ZOE 4.0
+                            par un utilisateur de ZOE 4.0 (41kW)
                         </i>
                     </pre>
 
@@ -47,8 +47,8 @@ const About = () => {
                     <FontAwesomeIcon icon={ faChargingStation } style={{ marginRight: 10 }} />
                     La liste des bornes est basée sur 
                     le <a href='https://www.data.gouv.fr/fr/datasets/fichier-consolide-des-bornes-de-recharge-pour-vehicules-electriques/#' target="_blank" rel="noopener noreferrer">
-                        fichier consolidé des bornes de rechargeIRVE (Août 2019)
-                    </a> fourni par data.gouv.fr. Les bornes sont consultables sur ce site <a href="http://bornes.philnoug.com">bornes.philnoug.com</a> 
+                        fichier consolidé des bornes de recharge IRVE (Août 2019)
+                    </a> fourni par data.gouv.fr. Ces données importées régulièrement sont consultables sur mon site <a href="https://bornes-irve.philnoug.com">bornes-irve.philnoug.com</a> 
                     <br /><br />
 
                     <FontAwesomeIcon icon={ faCodeBranch } style={{ marginRight: 10 }} />

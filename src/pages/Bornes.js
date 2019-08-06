@@ -4,11 +4,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlug, faChargingStation, faEuroSign } from '@fortawesome/free-solid-svg-icons';
 
 
-const PATH_BASE   = 'http://bornes.philnoug.com';
-//const PATH_BASE     = 'http://localhost:3030';
-
+const PATH_BASE   = 'https://bornes-irve.philnoug.com';
 const PATH_SEARCH = '/api/v1/bornes.json';
-
 const PARAM_KEY1  = 'location=';
 const PARAM_KEY2  = 'kms=';
 
