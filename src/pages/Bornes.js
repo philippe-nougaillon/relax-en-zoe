@@ -77,12 +77,14 @@ class Bornes extends Component {
   }
 
   render() {
-    const { result, loading, searchTerm, error, currentLocation, limit, kms } = this.state;
+    const { result, loading, error, currentLocation, limit, kms } = this.state;
 
-    const isSearched = searchTerm => item =>
-              item.ad_station.toLowerCase().includes(searchTerm.toLowerCase()); 
+    // const isSearched = searchTerm => item =>
+    //           item.ad_station.toLowerCase().includes(searchTerm.toLowerCase()); 
 
-    const bornes = result.filter(isSearched(searchTerm));
+    // const bornes = result.filter(isSearched(searchTerm));
+
+    const bornes = result;
 
     return (
         <div className="container">
