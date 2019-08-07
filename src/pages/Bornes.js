@@ -73,9 +73,9 @@ class Bornes extends Component {
           <div className="card">
             <div className="card-header">
                 <h1>
-                    <small className="text-info">Bornes</small>
+                    <small className="text-info">Bornes autour de</small>
                     <form>
-                    Autour de <input
+                        <input
                             type="text"
                             onChange={ this.onLocationChange }
                             value={ currentLocation }
@@ -116,14 +116,7 @@ class Bornes extends Component {
 }
 
 const ListeBornes = ({ list }) =>
-  <table className="table table-condensed table-striped">
-    <thead>
-      <tr>
-        <th>Adresse</th>
-        <th>Puissance/Prix</th>
-      </tr>
-    </thead>
-    
+  <table className="table table-condensed">
     <tbody>
       {list.map(item => 
         <tr key={ item.id }>
