@@ -3,13 +3,9 @@ import React, { Component } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlug, faChargingStation, faEuroSign } from '@fortawesome/free-solid-svg-icons';
 
-
-//const PATH_BASE   = 'http://localhost:3030';
 const PATH_BASE   = 'https://bornes-irve.philnoug.com';
 const PATH_SEARCH = '/api/v1/bornes.json';
 const PARAM_KEY1  = 'location=';
-const PARAM_KEY2  = 'kms=';
-
 
 class Bornes extends Component {
   
@@ -17,11 +13,8 @@ class Bornes extends Component {
     super(props);
 
     this.state = {
-      kms: 20,
-      limit: 10,
       result: [],
       loading: false,
-      searchTerm: '',
       error: false,
       currentLocation: '',
     }
@@ -29,7 +22,6 @@ class Bornes extends Component {
     this.setBornesResult = this.setBornesResult.bind(this);
     this.setLoading = this.setLoading.bind(this);
     this.fetchBornesData = this.fetchBornesData.bind(this);
-    this.onFilterChange = this.onFilterChange.bind(this);
     this.onLocationChange = this.onLocationChange.bind(this);
   }
 
@@ -45,12 +37,12 @@ class Bornes extends Component {
     this.setState({ loading: isLoading })
   }
 
-  fetchBornesData(_location, _autonomie) {
+  fetchBornesData(_location) {
 
     this.setLoading(true);
 
     // Liste des bornes à proximité
-    fetch(`${PATH_BASE}${PATH_SEARCH}?${PARAM_KEY1}${_location}&${PARAM_KEY2}${_autonomie}`)
+    fetch(`${PATH_BASE}${PATH_SEARCH}?${PARAM_KEY1}${_location}`)
       .then(response => response.json())
       .then(result => this.setBornesResult(result))
       .then(ret => this.setLoading(false))
@@ -61,30 +53,19 @@ class Bornes extends Component {
     const value =  event.target.value;
     this.setState({ currentLocation: value });
 
-    if (value && value.length > 3 && !this.state.loading) {
+    if (value.length > 3) {
         // Lire la liste des bornes à proximité de la ville saisie
-        this.fetchBornesData(value, this.state.kms);
+        this.fetchBornesData(value);
     }
-  }
-
-  onFilterChange(event) {
-    this.setState({ searchTerm: event.target.value });
   }
 
   componentDidMount() {
     // Afficher la liste au chargement de la page 
-    this.fetchBornesData(this.state.currentLocation, this.state.kms);
+    this.fetchBornesData(this.state.currentLocation);
   }
 
   render() {
-    const { result, loading, error, currentLocation, limit, kms } = this.state;
-
-    // const isSearched = searchTerm => item =>
-    //           item.ad_station.toLowerCase().includes(searchTerm.toLowerCase()); 
-
-    // const bornes = result.filter(isSearched(searchTerm));
-
-    const bornes = result;
+    const { result, loading, error, currentLocation} = this.state;
 
     return (
         <div className="container">
@@ -113,23 +94,21 @@ class Bornes extends Component {
                   <div className="colored_div">Chargement...</div>
             }  
 
-            { (!loading && bornes.length > 0) &&
+            { (!loading && result.length > 0) &&
                 <span>
                   <div className="card-body">
                       <ListeBornes 
-                          list ={ bornes }
-                          limit={ limit }
+                          list ={ result }
                       />
                   </div>
         
                   <div className="card-footer">
-                          <div className="colored_div">
-                              Liste limitée à { bornes.length } bornes dans un rayon de { kms | 0 } km
-                          </div>
+                      <div className="colored_div">
+                          Liste limitée à { result.length } bornes dans un rayon de 20 kms
+                      </div>
                   </div>
                 </span> 
             }
-
           </div>
       </div>
     );
