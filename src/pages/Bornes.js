@@ -80,18 +80,26 @@ class Bornes extends Component {
                             onChange={ this.onLocationChange }
                             value={ currentLocation }
                             size="8"
+                            placeholder="ville ?"
+
                         />  
                     </form> 
                 </h1>
-
                 { error && 
                     <h3>Pas de réseau :/</h3>  
                 }
-
             </div>
 
+            { (result.length === 0) &&
+              <span>
+                  Entrez le nom d'une ville d'arrivée pour voir 
+                  les bornes de recharge à proximité...  
+              </span>
+            }
+
+
             { (loading && !error) &&
-                  <div className="colored_div">Chargement...</div>
+                <div className="colored_div">Chargement...</div>
             }  
 
             { (!loading && result.length > 0) &&
@@ -104,12 +112,17 @@ class Bornes extends Component {
         
                   <div className="card-footer">
                       <div className="colored_div">
-                          Liste limitée à { result.length } bornes dans un rayon de 20 kms
+                          <small>
+                            Liste limitée à { result.length } bornes dans un rayon de 20 kms
+                            <br />
+                            Cliquez sur le nom d'une borne pour voir les détails
+                        </small>
                       </div>
                   </div>
                 </span> 
             }
           </div>
+          <br />
       </div>
     );
   }
@@ -121,24 +134,21 @@ const ListeBornes = ({ list }) =>
       {list.map(item => 
         <tr key={ item.id }>
           <td>
+              <small>
+                ~ { item.distance | 0 } km
+              </small>
+              <br />
               <a href={ `${PATH_BASE}/bornes/${ item.id }` } rel="noopener noreferrer">
                 { item.n_station }
               </a>
               <br />
-              <small>
-                ~ { item.distance | 0 } km
-              </small>
-          </td>
-          <td>
-              <FontAwesomeIcon icon={ faChargingStation } style={{ marginRight: 10 }} />
+              <FontAwesomeIcon icon={ faChargingStation } style={{ marginRight: 5 }} />
               { parseInt(item.puiss_max) | 0 } kWh
-              <br />  
 
-              <FontAwesomeIcon icon={ faPlug } style={{ marginRight: 10 }} />
+              <FontAwesomeIcon icon={ faPlug } style={{ marginLeft: 15, marginRight: 5 }} />
               { item.type_prise }
-              <br /> 
 
-              <FontAwesomeIcon icon={ faEuroSign } style={{ marginRight: 10 }} />
+              <FontAwesomeIcon icon={ faEuroSign } style={{ marginLeft: 15, marginRight: 5 }} />
               { item.acces_recharge }
           </td>
         </tr>
