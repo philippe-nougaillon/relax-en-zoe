@@ -42,7 +42,7 @@ const About = () => {
                     L'estimation de l'autonomie est approximative. Elle est calculée à partir de données trouvées sur le net.<br />
 
                     <FontAwesomeIcon icon={ faEuroSign } style={{ marginRight: 10 }} />
-                    Le tarif EDF utilisé pour estimer le coût d'une charge est de 0.15 €/kWh en heures pleines.<br />
+                    Le tarif utilisé pour estimer le coût d'une charge est celui d'EDF, à 0.15€ le kWh (heures pleines).<br />
 
                     <FontAwesomeIcon icon={ faChargingStation } style={{ marginRight: 10 }} />
                     La liste des bornes est basée sur 

@@ -4,6 +4,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlug, faChargingStation, faEuroSign } from '@fortawesome/free-solid-svg-icons';
 
 const PATH_BASE   = 'https://bornes-irve.philnoug.com';
+//const PATH_BASE   = 'http://localhost:3030';
+
 const PATH_SEARCH = '/api/v1/bornes.json';
 const PARAM_KEY1  = 'location=';
 
@@ -23,6 +25,7 @@ class Bornes extends Component {
     this.setLoading = this.setLoading.bind(this);
     this.fetchBornesData = this.fetchBornesData.bind(this);
     this.onLocationChange = this.onLocationChange.bind(this);
+    this.onLocationSubmit = this.onLocationSubmit.bind(this);
   }
 
   setBornesResult(result) {
@@ -51,18 +54,23 @@ class Bornes extends Component {
 
   onLocationChange(event) {
     const value =  event.target.value;
+    this.setState({ currentLocation: value });
+  }
+
+  onLocationSubmit(event) {
 
     // si un chargement de données n'est pas déjà en cours
     if (!this.loading) {
-      // On affiche ce qui est tapé par l'utilisateur
-      this.setState({ currentLocation: value });
       // Si la ville entrée fait plus de 4 lettres
-      if (value.length > 3) {
+      if (this.state.currentLocation.length > 3) {
         // On charge les données
-        this.fetchBornesData(value);
+        this.fetchBornesData(this.state.currentLocation);
+        
       }
     }
   }
+
+
 
   render() {
     const { result, loading, error, currentLocation} = this.state;
@@ -74,20 +82,16 @@ class Bornes extends Component {
             <div className="card-header">
                 <h1>
                     <small className="text-info">Bornes autour de</small>
-                    <form>
+                    <form onSubmit={ this.onLocationSubmit }>
                         <input
                             type="text"
                             onChange={ this.onLocationChange }
                             value={ currentLocation }
                             size="8"
                             placeholder="ville ?"
-
-                        />  
+                        />
                     </form> 
                 </h1>
-                { error && 
-                    <h3>Pas de réseau :/</h3>  
-                }
             </div>
 
             { (currentLocation.length === 0) &&
@@ -101,6 +105,10 @@ class Bornes extends Component {
               <span>
                 Bizarre... Il n'y a aucune borne trouvée à proximité de '{ currentLocation }' !  
               </span>
+            }
+            
+            { error &&
+                <span>Pas de réseau ?!?</span>  
             }
 
             { (loading && !error) &&
