@@ -52,17 +52,16 @@ class Bornes extends Component {
   onLocationChange(event) {
     const value =  event.target.value;
 
+    // si un chargement de données n'est pas déjà en cours
     if (!this.loading) {
+      // On affiche ce qui est tapé par l'utilisateur
       this.setState({ currentLocation: value });
+      // Si la ville entrée fait plus de 4 lettres
       if (value.length > 3) {
+        // On charge les données
         this.fetchBornesData(value);
       }
     }
-  }
-
-  componentDidMount() {
-    // Afficher la liste au chargement de la page 
-    //this.fetchBornesData(this.state.currentLocation);
   }
 
   render() {
