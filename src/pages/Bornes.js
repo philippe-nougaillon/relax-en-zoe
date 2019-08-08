@@ -90,10 +90,16 @@ class Bornes extends Component {
                 }
             </div>
 
-            { (result.length === 0) &&
+            { (currentLocation.length === 0) &&
               <span>
                   Entrez le nom d'une ville d'arrivée pour voir 
                   les bornes de recharge à proximité...  
+              </span>
+            }
+
+            { (result.length === 0 && currentLocation.length > 0) &&
+              <span>
+                  Aucune bornes trouvées à proximité de '{ currentLocation }''...  
               </span>
             }
 
@@ -112,8 +118,7 @@ class Bornes extends Component {
                   <div className="card-footer">
                       <div className="colored_div">
                           <small>
-                            Liste limitée à { result.length } bornes dans un rayon de 20 kms
-                            <br />
+                            Liste limitée à { result.length } bornes dans un rayon de 20 kms.
                             Cliquez sur le nom d'une borne pour voir les détails
                         </small>
                       </div>
