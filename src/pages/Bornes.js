@@ -51,17 +51,18 @@ class Bornes extends Component {
 
   onLocationChange(event) {
     const value =  event.target.value;
-    this.setState({ currentLocation: value });
 
-    if (value.length > 3) {
-        // Lire la liste des bornes à proximité de la ville saisie
+    if (!this.loading) {
+      this.setState({ currentLocation: value });
+      if (value.length > 3) {
         this.fetchBornesData(value);
+      }
     }
   }
 
   componentDidMount() {
     // Afficher la liste au chargement de la page 
-    this.fetchBornesData(this.state.currentLocation);
+    //this.fetchBornesData(this.state.currentLocation);
   }
 
   render() {
@@ -96,7 +97,6 @@ class Bornes extends Component {
                   les bornes de recharge à proximité...  
               </span>
             }
-
 
             { (loading && !error) &&
                 <div className="colored_div">Chargement...</div>
