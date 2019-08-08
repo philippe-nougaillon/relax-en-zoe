@@ -91,15 +91,15 @@ class Bornes extends Component {
             </div>
 
             { (currentLocation.length === 0) &&
-              <span>
-                  Entrez le nom d'une ville d'arrivée pour voir 
-                  les bornes de recharge à proximité...  
-              </span>
+                <span>
+                    Entrez le nom d'une ville d'arrivée pour voir 
+                    les bornes de recharge à proximité...  
+                </span>
             }
 
             { (result.length === 0 && currentLocation.length > 0) &&
               <span>
-                  Aucune bornes trouvées à proximité de '{ currentLocation }''...  
+                Bizarre... Il n'y a aucune borne trouvée à proximité de '{ currentLocation }' !  
               </span>
             }
 
@@ -110,18 +110,18 @@ class Bornes extends Component {
             { (!loading && result.length > 0) &&
                 <span>
                   <div className="card-body">
-                      <ListeBornes 
-                          list ={ result }
-                      />
+                    <ListeBornes 
+                        list ={ result }
+                    />
                   </div>
         
                   <div className="card-footer">
-                      <div className="colored_div">
-                          <small>
-                            Liste limitée à { result.length } bornes dans un rayon de 20 kms.
-                            Cliquez sur le nom d'une borne pour voir les détails
-                        </small>
-                      </div>
+                    <div className="colored_div">
+                        <small>
+                          Liste limitée à { result.length } bornes dans un rayon de 20 kms.
+                          Cliquez sur le nom d'une borne pour voir les détails
+                      </small>
+                    </div>
                   </div>
                 </span> 
             }
