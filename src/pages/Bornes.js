@@ -58,10 +58,11 @@ class Bornes extends Component {
   }
 
   onLocationSubmit(event) {
+    event.preventDefault();
 
     // si un chargement de données n'est pas déjà en cours
     if (!this.loading) {
-      // Si la ville entrée fait plus de 4 lettres
+      // Si le nom de la ville fait plus de 3 lettres
       if (this.state.currentLocation.length > 3) {
         // On charge les données
         this.fetchBornesData(this.state.currentLocation);
@@ -69,8 +70,6 @@ class Bornes extends Component {
       }
     }
   }
-
-
 
   render() {
     const { result, loading, error, currentLocation} = this.state;
@@ -100,12 +99,6 @@ class Bornes extends Component {
                     les bornes de recharge à proximité...  
                 </span>
             }
-
-            { (result.length === 0 && currentLocation.length > 0) &&
-              <span>
-                Bizarre... Il n'y a aucune borne trouvée à proximité de '{ currentLocation }' !  
-              </span>
-            }
             
             { error &&
                 <span>Pas de réseau ?!?</span>  
@@ -127,7 +120,7 @@ class Bornes extends Component {
                     <div className="colored_div">
                         <small>
                           Liste limitée à { result.length } bornes dans un rayon de 20 kms.
-                          Cliquez sur le nom d'une borne pour voir les détails
+                          Cliquez sur le nom d'une borne pour en voir les détails.
                       </small>
                     </div>
                   </div>
