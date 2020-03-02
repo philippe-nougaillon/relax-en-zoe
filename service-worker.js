@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/AutonomieZoe_ReactRedux/precache-manifest.c9dd580942c95abc30c5c19fb39f94db.js"
+  "/AutonomieZoe_ReactRedux/precache-manifest.a6a8dfc2ab019a31d19fc1f31cf2f375.js"
 );
 
 workbox.clientsClaim();
