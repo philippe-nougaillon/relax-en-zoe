@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlug, faChargingStation, faEuroSign } from '@fortawesome/free-solid-svg-icons';
 
-const PATH_BASE   = 'https://bornes-irve.philnoug.com';
+const PATH_BASE   = 'https://bornes-irve.herokuapp.com';
 //const PATH_BASE   = 'http://localhost:3030';
 
 const PATH_SEARCH = '/api/v1/bornes.json';

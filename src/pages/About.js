@@ -48,7 +48,7 @@ const About = () => {
                     La liste des bornes est basée sur 
                     le <a href='https://www.data.gouv.fr/fr/datasets/fichier-consolide-des-bornes-de-recharge-pour-vehicules-electriques/#' target="_blank" rel="noopener noreferrer">
                         fichier consolidé des bornes de recharge IRVE (Mars 2020)
-                    </a> fourni par data.gouv.fr. Ces données sont importées régulièrement. Elles sont consultables sur mon site <a href="https://bornes-irve.philnoug.com">bornes-irve.philnoug.com</a> 
+                    </a> fourni par data.gouv.fr. Ces données sont importées régulièrement. Elles sont consultables sur mon site <a href="https://bornes-irve.herokuapp.com">bornes-irve.herokuapp.com</a> 
                     <br /><br />
 
                     <FontAwesomeIcon icon={ faCodeBranch } style={{ marginRight: 10 }} />
